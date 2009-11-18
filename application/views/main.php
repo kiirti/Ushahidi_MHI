@@ -17,12 +17,28 @@
 
 <div id="content">
   <div class="content-bg">
+
+  <?
+    if (!$user){
+      print '<p /><a href="login">Login</a>';
+    } else {
+      print 'Welcome '.$user->username . " | <a href=\"admin/log_out\">Logout</a>";
+      if ($user->has(ORM::factory('role', 'admin'))){
+        print "<p />Welcome <a href=\"/admin\">Admin</a></p>";
+      }
+    }
+    ?>
+
+    <p />
+    <a href="signup/page<?= ($user)? "2": "1"; ?>">Create a new instance</a>
+
     <!-- start map and media filter -->
     <div class="big-block">
       <div class="big-block-top">
         <div class="big-block-bottom">
           <div class="big-map-block">
             <div class="filter">
+            <!--
               <strong><?php echo Kohana::lang('ui_main.media_filter'); ?></strong>
               <ul>
                 <li><a id="media_0" class="active" href="#"><span><?php echo Kohana::lang('ui_main.reports'); ?></span></a></li>
@@ -31,6 +47,7 @@
                 <li><a id="media_2" href="#"><span><?php echo Kohana::lang('ui_main.video'); ?></span></a></li>
                 <li><a id="media_0" href="#"><span><?php echo Kohana::lang('ui_main.all'); ?></span></a></li>
               </ul>
+              -->
             </div>
             <div id="map" class="map-holder"></div>
             <div class="slider-holder">
@@ -54,11 +71,11 @@
             </div>
 
 			<div class="category">
-				<strong class="title">CATEGORY FILTER</strong>
+				<strong class="title">SITE FILTER</strong>
 				<div class="grey-box">
 					<div class="grey-box-bg">
 						<ul>
-							<li><a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:#<?php echo $default_map_all;?>"></div><div class="float:left">All Categories</div></a></li>
+							<li><a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:#<?php echo $default_map_all;?>"></div><div class="float:left">All Sites</div></a></li>
 							<?php
 							foreach ($categories as $category => $category_info)
 							{
@@ -77,7 +94,7 @@
 			if ($shares)
 			{ ?>
 				<div class="category" style="margin-top:20px;">
-					<strong class="title">OTHER USHAHIDI INSTANCES</strong>
+					<strong class="title">HOSTED INSTANCES</strong>
 					<div class="grey-box">
 						<div class="grey-box-bg">
 							<ul>
@@ -86,7 +103,10 @@
 								{
 								$sharing_site_name = $share_info[0];
 								$sharing_color = $share_info[1];
-								echo '<li><a href="#" id="share_'. $share .'"><div class="swatch" style="background-color:#'.$sharing_color.'"></div>
+                                $sharing_domain = $share_info[2];
+								echo '<li><a href="http://' . $sharing_domain 
+                                  . Kohana::config('settings.hosting_domain').'" target="new">
+                                <div class="swatch" style="background-color:#'.$sharing_color.'"></div>
 								<div>'.$sharing_site_name.'</div></a></li>';
 								}
 								?>
@@ -98,6 +118,7 @@
 			}
 			?>
 
+            <!--
 			<div class="category" style="margin-top:20px;">
 				<strong class="title">HOW TO REPORT</strong>
 				<div class="grey-box">
@@ -124,11 +145,11 @@
 						</ol>					
 					</div>
 				</div>
-
 				<div class="report-btns">
 				<a class="btn-red" href="<?php echo url::base() . 'reports/submit/'; ?>"><span><?php echo Kohana::lang('ui_main.submit'); ?></span></a>
 				</div>			
 			</div>
+            -->
 
 
           </div>
@@ -173,7 +194,8 @@
                   <li>
                     <ul>
                       <li class="w-01">
-                        <a href="<?php echo url::base() . 'reports/view/' . $incident_id; ?>">
+                        <a href="<?php echo str_replace("www", $incident->site->subdomain, url::base())
+                          . 'reports/view/' . $incident_id; ?>" target="new">
                         <?php echo $incident_title ?></a></li>
                       <li class="w-02"><?php echo $incident_location ?></li>
                       <li class="w-03"><?php echo $incident_date; ?></li>
@@ -183,11 +205,12 @@
 					}
 				?>
                 </ul>
-                <a class="btn-more" href="<?php echo url::base() . 'reports/'; ?>"><span>MORE</span></a>
+  <!--              <a class="btn-more" href="<?php echo url::base() . 'reports/'; ?>"><span>MORE</span></a>-->
               </div>
             </div>
           </div>
         </div>
+        <!--
         <div class="small-block news">
           <h3><?php echo Kohana::lang('ui_main.official_news'); ?></h3>
           <div class="block-bg">
@@ -228,6 +251,7 @@
             </div>
           </div>
         </div>
+        -->
       </div>
       <!-- end start incidents and news blocks -->
     </div>

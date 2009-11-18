@@ -18,6 +18,10 @@ class Dashboard_Controller extends Admin_Controller
 	function __construct()
 	{
 		parent::__construct();
+        if (!$this->auth->logged_in('admin') && !$this->auth->logged_in('superadmin'))
+        {
+          url::redirect('');
+        }
 	}
 	
 	function index()

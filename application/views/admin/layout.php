@@ -107,6 +107,10 @@
 					<li><a href="<?php echo url::base() ?>admin/feedback" <?php if($this_page=="feedback") echo "class=\"active\"" ;?>>
 						<?php echo Kohana::lang('layout.feedback')?>
 						</a></li>
+                    <li><a href="<?php echo url::base() ?>admin/instances" <?php if($this_page=="instances") echo "class=\"active\"" ;?>>
+                        <?php echo Kohana::lang('layout.instances')?>
+                        </a></li>
+
 				</ul>
 				<!-- sub-nav -->
 				<ul class="sub-nav">

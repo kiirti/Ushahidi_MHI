@@ -6,7 +6,12 @@
 
 $config = array
 (
-	'site_name' => 'Ushahidi',
+	'site_name' => 'Ushahidi MHI',
+    'hosting_domain' => '.kiirti.org',
+    'deployments' => '/root/kiirti/multiple/deployments',
+    //'ushahidi' => '/root/kiirti/multiple/Ushahidi_MHI/Ushahidi_Web',
+    'create_db' => '/scripts/create_instance.sh',
+    'create_db_log' => '/tmp/kiirti.log',
 	'site_email' => '',
 	'default_map' => '',
 	'api_google' => '',

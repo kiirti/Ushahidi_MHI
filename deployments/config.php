@@ -4,7 +4,9 @@
  * then a full URL will be used, eg: http://localhost/ushahidi/. If it only includes
  * the path, and a site_protocol is specified, the domain will be auto-detected.
  */
-$config['site_domain'] = '/';
+//$config['site_domain'] = '/';
+$site = array_shift(explode(".", $_SERVER['HTTP_X_FORWARDED_HOST']));
+$config['site_domain'] = "$site.kiirti.org/";
 
 /**
  * Force a default protocol to be used by the site. If no site_protocol is

@@ -83,6 +83,7 @@
 				<strong><a href ="<?php echo url::base(); ?>" <?php echo $site_name_style; ?>><?php echo $site_name; ?></a></strong>
 				<p><?php echo $site_tagline; ?></p>
 			</div>
+            <!--
 			<ul id="menu">
 				<li class="first"><a <?php if ($this_page == 'home') echo 'class="active"'; ?> href="<?php echo url::base() . "main" ?>"><?php echo Kohana::lang('ui_main.home'); ?></a></li>
 				<li><a <?php if ($this_page == 'reports') echo 'class="active"'; ?> href="<?php echo url::base() . "reports/" ?>"><?php echo Kohana::lang('ui_main.reports'); ?></a></li>
@@ -105,5 +106,6 @@
 					</form>
 				</div>
 			</div>
+            -->
 		</div>
 		<!-- end header block <> start content block -->

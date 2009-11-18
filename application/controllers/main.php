@@ -21,6 +21,9 @@ class Main_Controller extends Template_Controller {
 	
     // Cache instance
     protected $cache;
+
+    // User
+    protected $user;
 	
     public function __construct()
     {
@@ -28,6 +31,14 @@ class Main_Controller extends Template_Controller {
 
         // Load cache
         $this->cache = new Cache;
+
+        // Auth
+        $this->auth = new Auth();
+        $this->session = Session::instance();
+        $this->auth->auto_login();
+        if(array_key_exists('auth_user', $_SESSION)){
+          $this->user = new User_Model($_SESSION['auth_user']->id);
+        }
 		
         // Load Header & Footer
         $this->template->header  = new View('header');
@@ -95,28 +106,27 @@ class Main_Controller extends Template_Controller {
     {		
         $this->template->header->this_page = 'home';
         $this->template->content = new View('main');
+        $this->template->content->set("user", $this->user);
 		
-        // Get all active categories
+        $db = new Database();
+
+        $show_user = ($this->user)? " OR user_id = ".$this->user->id." ": "";
+        $sites = $db->query("SELECT id,dbdatabase,sitename,subdomain,tagline FROM sites WHERE is_approved AND (is_public $show_user)");
+        $this->template->content->set("sites", $sites);
+
+        // Get all active categories, and sites
         $categories = array();
-        foreach (ORM::factory('category')
-                 ->where('category_visible', '1')
-                 ->find_all() as $category)
-        {
-            // Create a list of all categories
-            $categories[$category->id] = array($category->category_title, $category->category_color);
+        $dbs = array();
+        $shares = array();
+        foreach ($sites as $category){
+          // Create a list of all sites
+          $categories[$category->id] = array( $category->tagline, $this->_id2color($category->id));
+          $shares[$category->id] = array($category->tagline, $this->_id2color($category->id), 
+            $category->subdomain);
+          array_push($dbs, $category->dbdatabase);
         }
         $this->template->content->categories = $categories;
-
-		// Get all active Shares
-		$shares = array();
-		foreach (ORM::factory('sharing')
-				  ->where('sharing_active', 1)
-				  ->where('sharing_type', 1)
-				  ->find_all() as $share)
-		{
-			$shares[$share->id] = array($share->sharing_site_name, $share->sharing_color);
-		}
-		$this->template->content->shares = $shares;
+        $this->template->content->shares = $shares;
 		
         // Get Reports
         // XXX: Might need to replace magic no. 8 with a constant
@@ -169,7 +179,6 @@ class Main_Controller extends Template_Controller {
 
 
         // We need to use the DB builder for a custom query
-        $db = new Database();	
         $query = $db->query('SELECT DATE_FORMAT(incident_date, \'%Y\') AS incident_date FROM incident WHERE incident_active = 1 GROUP BY DATE_FORMAT(incident_date, \'%Y\') ORDER BY incident_date');
         foreach ($query as $slider_date)
         {
@@ -256,6 +265,22 @@ class Main_Controller extends Template_Controller {
 		$this->template->header->js .= $footerjs;
 	}
 	
+    /*
+     * Map a site id to a html color.
+     * @param id int site id.
+     * @return string color in hex form.
+     */
+    private function _id2color($id){
+      $max = 200;
+      $sep = 9;
+      $num = ($id * $sep) % $max;
+      $c = '';
+      while(strlen($c)<6){
+        $c .= sprintf("%02X", (($id * $sep) % $max));
+        $sep *= 2;
+      }
+      return $c;
+    }
 	
 	/*
 	* Google Analytics

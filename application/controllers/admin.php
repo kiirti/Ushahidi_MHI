@@ -48,7 +48,7 @@ class Admin_Controller extends Template_Controller
 		if (!$this->auth->logged_in('admin')
 			 && !$this->auth->logged_in('login'))
 		{
-			url::redirect('login');
+			url::redirect('');
 		}
 		
 		// Get Session Information

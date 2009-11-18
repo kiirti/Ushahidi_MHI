@@ -370,6 +370,7 @@ CREATE TABLE IF NOT EXISTS `incident` (
   `form_id` int(11) NOT NULL default '1',
   `locale` varchar(10) NOT NULL default 'en_US',
   `user_id` bigint(20) default NULL,
+  `site_id` bigint(20) unsigned default NULL,
   `incident_title` varchar(255) default NULL,
   `incident_description` longtext,
   `incident_date` datetime default NULL,
@@ -882,6 +883,30 @@ INSERT INTO `users` (`id`, `name`, `email`, `username`, `password`, `logins`, `l
 (1, 'Administrator', 'david@ushahidi.com', 'admin', 'bae4b17e9acbabf959654a4c496e577003e0b887c6f52803d7', 290, 1221420023, '2008-09-14 14:17:22');
 
 -- --------------------------------------------------------
+
+--
+-- Table structure for table `sites`
+--
+CREATE TABLE `sites` (
+   id             serial PRIMARY KEY,
+   user_id        bigint(20) unsigned NOT NULL,
+   sitename       varbinary(255) NOT NULL UNIQUE,
+   subdomain      varbinary(255) NOT NULL UNIQUE,
+   tagline        varbinary(1027) NOT NULL DEFAULT "",
+   description    blob NOT NULL DEFAULT "",
+   keywords       varbinary(1027) NOT NULL DEFAULT "",
+   is_public      bool DEFAULT false,
+   is_approved    bool DEFAULT false,
+   dbuser         varbinary(255) NOT NULL,
+   dbtype         varbinary(255) NOT NULL DEFAULT 'mysql',
+   dbpass         varbinary(255) NOT NULL,
+   dbhost         varbinary(255) NOT NULL DEFAULT 'localhost',
+   dbport         varbinary(255) NOT NULL DEFAULT '',
+   dbsocket       int NOT NULL DEFAULT 3306,
+   dbdatabase     varbinary(255) NOT NULL,
+   added_on       timestamp DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET='binary';
+
 
 --
 -- Table structure for table `user_tokens`
