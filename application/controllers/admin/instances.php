@@ -51,6 +51,8 @@ class Instances_Controller extends Admin_Controller {
         . " " . escapeshellarg($user->username)
         . " " . escapeshellarg($user->password)
         . " " . escapeshellarg($user->email)
+        . " " . escapeshellarg($site->sitename)
+        . " " . escapeshellarg($site->tagline)
         . " >> " . Kohana::config('settings.create_db_log')
         . " 2>&1";
 
