@@ -120,8 +120,8 @@ class Main_Controller extends Template_Controller {
         $shares = array();
         foreach ($sites as $category){
           // Create a list of all sites
-          $categories[$category->id] = array( $category->tagline, $this->_id2color($category->id));
-          $shares[$category->id] = array($category->tagline, $this->_id2color($category->id), 
+          $categories[$category->id] = array( $category->sitename, $this->_id2color($category->id));
+          $shares[$category->id] = array($category->sitename, $this->_id2color($category->id), 
             $category->subdomain);
           array_push($dbs, $category->dbdatabase);
         }

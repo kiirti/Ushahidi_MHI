@@ -27,6 +27,7 @@
 				</ul>
 				
 				<p><?php echo Kohana::lang('ui_main.copyright'); ?></p>
+                <!--
 				<p class="feedback_title">
 					<a href="javascript:showForm('table-holder')"><?php echo Kohana::lang('ui_main.feedback'); ?></a>
 				</p>
@@ -71,6 +72,7 @@
 						</tbody>
 					</table>
 				</div>
+                -->
 			</div>
 			<strong class="f-logo"><a href="http://www.ushahidi.com">Ushahidi</a></strong>
 			<img src="<?php echo $tracker_url; ?>" />
