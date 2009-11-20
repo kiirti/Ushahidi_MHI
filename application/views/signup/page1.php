@@ -3,6 +3,8 @@
 <div id="content">
   <div class="content-bg">
     <h3>Welcome to Ushahidi MHI | Signup Page 1/3 | Account Setup</h3>
+
+    Existing users, <a href="<?= url::base() ?>login">Login</a> here.
     <?
     // Show form
 	echo form::open('signup/page1', array('method'=>'post'));

@@ -25,6 +25,16 @@ $lang = array(
     'chars' => 'Valid Chars: a-zA-Z0-9',
     'length' => 'Length must be from 3 to 20 characters',
     'domain_unique' => 'This name is taken',
+    'required' => 'Required',
+  ),
+  'tagline' => array (
+    'required' => 'Required',
+  ),
+  'description' => array (
+    'required' => 'Required',
+  ),
+  'keywords' => array (
+    'required' => 'Required',
   ),
   'sitename' => array (
     'chars' => 'Valid Chars: a-zA-Z0-9',

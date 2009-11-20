@@ -27,7 +27,8 @@ class Site_Model extends ORM
 		  ->add_rules('sitename', 'required', 'length[4,127]', array($this, 'sitename_exists'))
 	      ->add_rules('subdomain', 'required', 'length[3,20]', 'chars[a-zA-Z0-9]', array($this, 'domain_unique'))
 		  ->add_rules('description', 'required')
-		  ->add_rules('keywords', 'required');
+		  ->add_rules('keywords', 'required')
+          ->add_rules('tagline', 'required');
 	  return parent::validate($array, $save);
 	}
 
