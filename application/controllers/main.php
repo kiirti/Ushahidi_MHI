@@ -272,7 +272,7 @@ class Main_Controller extends Template_Controller {
      */
     private function _id2color($id){
       $max = 200;
-      $sep = 9;
+      $sep = 15;
       $num = ($id * $sep) % $max;
       $c = '';
       while(strlen($c)<6){

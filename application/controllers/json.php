@@ -90,12 +90,13 @@ class Json_Controller extends Template_Controller
 				->join('incident_category', 'incident.id', 'incident_category.incident_id','LEFT')
 				->join('media', 'incident.id', 'media.incident_id','LEFT')
 				->where('incident.incident_active = 1 AND 
-					incident_category.category_id = ' . $category_id . $where_text)
+					incident.site_id = ' . $category_id . $where_text)
 				->find_all();
 
             // Retrieve category color
 			$category = ORM::factory('category', $category_id);
-            $color = $category->category_color;
+            //$color = $category->category_color;
+            $color = $this->_id2color($category_id);
 			$icon = $category->category_image;
                      
         }
@@ -154,6 +155,18 @@ class Json_Controller extends Template_Controller
 
 		header('Content-type: application/json');
         $this->template->json = $json;
+    }
+
+    private function _id2color($id){
+      $max = 200;
+      $sep = 15;
+      $num = ($id * $sep) % $max;
+      $c = '';
+      while(strlen($c)<6){
+        $c .= sprintf("%02X", (($id * $sep) % $max));
+        $sep *= 2;
+      }
+      return $c;
     }
     
     public function timeline() {
