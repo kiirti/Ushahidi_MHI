@@ -383,6 +383,7 @@ CREATE TABLE IF NOT EXISTS `incident` (
   `incident_dateadd` datetime default NULL,
   `incident_dateadd_gmt` datetime default NULL,
   `incident_datemodify` datetime default NULL,
+  `instance_id` bigint(20) unsigned default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `location_id` (`location_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

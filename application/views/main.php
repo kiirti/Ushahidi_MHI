@@ -185,7 +185,7 @@
                   }
 					foreach ($incidents as $incident)
                 	{
-                    	$incident_id = $incident->id;
+                    	$incident_id = $incident->instance_id;
 						$incident_title = text::limit_chars($incident->incident_title, 40, '...', True);
                         $incident_date = $incident->incident_date;
                         $incident_date = date('M j Y', strtotime($incident->incident_date));
