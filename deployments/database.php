@@ -10,9 +10,9 @@ $site = array_shift(explode(".", $_SERVER['HTTP_X_FORWARDED_HOST']));
 $mhi_db = array(
   'user'     => 'mhiuser',
   'password' => 'mhiword',
-  'host'     => 'localhost',
+  'host'     => 'kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com',
   'port'     => '3306',
-  'database' => 'mhi'
+  'database' => 'mhidb'
 );
 
 $mhi_link = mysql_connect($mhi_db['host'].':'.$mhi_db['port'], $mhi_db['user'], $mhi_db['password']);

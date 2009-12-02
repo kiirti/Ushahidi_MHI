@@ -33,13 +33,14 @@
 	echo (empty ($errors['keywords'])) ? '' : $errors['keywords'];
 
 	print "<p />";
+    /* Not supported now. 
 	print form::label('public', 'This is public: ');
 	print form::radio('public', 'public').'<br />';
 	print form::label('public', 'This is private: ');
 	print form::radio('public', 'private', TRUE).'<br />';
 	echo (empty ($errors['public'])) ? '' : $errors['public'];
+    */
 
- 
     // Close form
     echo "<p />";
     echo form::submit(array('value' => 'Submit'));
