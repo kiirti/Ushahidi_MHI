@@ -174,6 +174,8 @@ class Signup_Controller extends Template_Controller {
       $post = $this->input->post();
       $this->site = ORM::factory('site');
 
+      $post['subdomain'] = strtolower($post['subdomain']);
+
 	  if ($this->site->validate($post)){
 	    //$this->site->is_public = ($post['public'])? true: false;
         $this->site->is_public = true;
@@ -182,7 +184,7 @@ class Signup_Controller extends Template_Controller {
         $this->site->dbuser = $this->user->username;
         $this->site->dbpass = $this->user->password;
         $this->site->dbhost = Kohana::config('settings.instance_dbhost');
-        $this->site->dbdatabase = $post['subdomain']."db";
+        $this->site->dbdatabase = $post['subdomain']."_instancedb";
 		$this->site->save();
         url::redirect('/signup/page3/'.$this->site->id);
    	  	exit(1);
