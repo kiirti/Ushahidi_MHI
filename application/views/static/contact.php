@@ -18,8 +18,10 @@
 	<div class="content-bg">
 		<!-- start reports block -->
 		<div class="big-block">
+<h2>&nbsp;&nbsp;Contact</h2>
 			<div class="big-block-top">
 				<div class="big-block-bottom">
+<h3>Please send a mail to <a href="mailto:contact@kiirti.org">contact@kiirti.org</a> for all enquiries.</h3>
 					<div class="org_rowtitle">
 	                </div>
 				</div>

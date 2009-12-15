@@ -20,7 +20,7 @@
 
   <?
     if (!$user){
-      print '<p /><a href="login">Login</a>';
+      print '<p /><a href="login"><b>Login</b></a>';
     } else {
       print 'Welcome '.$user->username . " | <a href=\"admin/log_out\">Logout</a>";
       if ($user->has(ORM::factory('role', 'admin'))){
@@ -30,7 +30,7 @@
     ?>
 
     <p />
-    <a href="signup/page<?= ($user)? "2": "1"; ?>">Create a new instance</a>
+    <a href="signup/page<?= ($user)? "2": "1"; ?>"><b>Request new instance</b></a>
 
     <!-- start map and media filter -->
     <div class="big-block">

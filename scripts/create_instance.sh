@@ -18,7 +18,7 @@ super_db="mhidb"
 dbuser="emoksha"
 dbpass="em0ksh2"
 dbhost="kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com"
-dbscript="/root/kiirti/multiple/ushahidi/sql/ushahidi.sql"
+dbscript="/root/kiirti/multiple/instances/sql/ushahidi.sql"
 site_host="domU-12-31-38-01-BC-B1.compute-1.internal"
 
 if [ "$name" == "" ]; then
