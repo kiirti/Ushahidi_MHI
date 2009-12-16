@@ -15,7 +15,7 @@
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
  */
 
-class User_Model extends Auth_User_Model {
+class User_Model extends Mhi_Auth_User_Model {
 
 	// Use this actual model (rather than extending it) when needing to write a custom user model
 

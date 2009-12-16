@@ -27,6 +27,7 @@ $lang = array
 	'feedback' => 'Feedback',
 	'ushahidi' => 'Ushahidi',
 	'messages' => 'Messages',
+    'instances' => 'Instances',
 	'stats' => 'Stats',
 	
 	// Users Tab

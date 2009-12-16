@@ -12,7 +12,7 @@
  * @copyright  Ushahidi - http://www.ushahidi.com
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL)
  */
-class Signup_Controller extends Template_Controller {
+class Signup_Controller extends Main_Controller {
   // Cache instance
   protected $cache;
 
@@ -37,65 +37,14 @@ class Signup_Controller extends Template_Controller {
     $this->cache = new Cache;
     $this->auth = new Auth();
 
-	// Global settings
-	$site_name = Kohana::config('settings.site_name');
-
-	// Load Header & Footer
-	$this->template->header  = new View('header');
-	$this->template->footer  = new View('footer');
-
-	$this->template->header->site_name = $site_name;
-
-	// Session info
-	$this->session = Session::instance();
-
-    // Retrieve Default Settings
-    $site_name = Kohana::config('settings.site_name');
-    // Prevent Site Name From Breaking up if its too long
-    // by reducing the size of the font
-    if (strlen($site_name) > 20){
-      $site_name_style = " style=\"font-size:21px;\"";
-    } else {
-      $site_name_style = "";
-    }
-    $this->template->header->site_name = $site_name;
-    $this->template->header->site_name_style = $site_name_style;
-    $this->template->header->site_tagline = Kohana::config('settings.site_tagline');
-    $this->template->header->api_url = Kohana::config('settings.api_url');
-
-    // Javascript Header
-    $this->template->header->map_enabled = FALSE;
-    $this->template->header->validator_enabled = FALSE;
-    $this->template->header->datepicker_enabled = FALSE;
-    $this->template->header->photoslider_enabled = FALSE;
-    $this->template->header->videoslider_enabled = FALSE;
-    $this->template->header->main_page = FALSE;
-    $this->template->header->js = new View('footer_form_js');
-
-    // Display News Feed?
-    $this->template->header->allow_feed = Kohana::config('settings.allow_feed');
-
-    $this->template->header->this_page = "";
-
-    // Google Analytics
-    $google_analytics = Kohana::config('settings.google_analytics');
-    $this->template->footer->google_analytics = $this->_google_analytics($google_analytics);
-    $this->template->header->site_language = Kohana::config('locale.language');
-    //Set up tracking gif
-    if($_SERVER['SERVER_NAME'] != 'localhost' && $_SERVER['SERVER_NAME'] != '127.0.0.1'){
-      $track_url = $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
-    }else{
-      $track_url = 'null';
-    }
-    $this->template->footer->tracker_url = 'http://tracker.ushahidi.com/track.php?url='.urlencode($track_url).'&lang='.$this->template->header->site_language.'';
-
     // User
     if(array_key_exists('auth_user', $_SESSION)){
       $this->user = new User_Model($_SESSION['auth_user']->id);
     }
   } 
 
-  public function page1(){
+  public function page1()
+  {
     $view = new View('signup/page1'); 
 
 	// Load Captcha library, you can supply the name of the config group you would like to use.

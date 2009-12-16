@@ -85,6 +85,11 @@ class Admin_Controller extends Template_Controller
 
 	public function index()
 	{
+        if (!$this->auth->logged_in('admin') && !$this->auth->logged_in('superadmin'))
+        {
+            url::redirect('');
+        }
+
 		// Send them to the right page
 		url::redirect('admin/dashboard');
 	}

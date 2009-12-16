@@ -158,7 +158,10 @@
 						</a></li>
 					<li><a href="<?php echo url::base() ?>admin/feedback" <?php if($this_page=="feedback") echo "class=\"active\"" ;?>>
 						<?php echo Kohana::lang('ui_admin.feedback')?>
-						</a></li>
+					    </a></li>
+                    <li><a href="<?php echo url::base() ?>admin/instances" <?php if($this_page=="instances") echo "class=\"active\"" ;?>>
+                        <?php echo Kohana::lang('ui_admin.instances')?>
+                        </a></li>
 					<li><a href="<?php echo url::base() ?>admin/stats" <?php if($this_page=="stats") echo "class=\"active\"" ;?>>
 						<?php echo Kohana::lang('ui_admin.stats')?>
 						</a></li>

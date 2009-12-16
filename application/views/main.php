@@ -254,7 +254,7 @@
 
 								</tbody>
 							</table>
-							<a class="more" href="<?php echo url::base() . 'reports/' ?>">View More...</a>
+							<!--<a class="more" href="<?php echo url::base() . 'reports/' ?>">View More...</a>-->
 						</div>
 						<!-- / left content block -->
 				
