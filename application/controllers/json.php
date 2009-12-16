@@ -84,7 +84,7 @@ class Json_Controller extends Template_Controller
         {
 			// Retrieve children categories and category color
 			$category = ORM::factory('category', $category_id);
-            $color = $category->category_color;
+            $color = $this->_id2color($category_id);
 			$icon = $category->category_image;
 			
 			$where_child = "";
@@ -103,7 +103,7 @@ class Json_Controller extends Template_Controller
 				->with('location')
 				->join('incident_category', 'incident.id', 'incident_category.incident_id','LEFT')
 				->join('media', 'incident.id', 'media.incident_id','LEFT')
-				->where('incident.incident_active = 1 AND (incident_category.category_id = ' . $category_id . ' ' . $where_child . ')' . $where_text)
+                ->where('incident.incident_active = 1 AND incident.site_id = ' . $category_id . $where_text)
 				->find_all();
 			
                      
@@ -126,8 +126,10 @@ class Json_Controller extends Template_Controller
             $json_item .= "\"type\":\"Feature\",";
             $json_item .= "\"properties\": {";
 			$json_item .= "\"id\": \"".$marker->id."\", \n";
-            $json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href='" . url::base() . "reports/view/" . $marker->id . "'>" . htmlentities($marker->incident_title) . "</a>")) . "\",";
-			
+
+            $url_base = str_replace("www", $marker->site->subdomain, url::base());
+            $json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href='" .  $url_base . "reports/view/" . $marker->instance_id . "' target='new'>" . htmlentities($marker->incident_title) . "</a>")) . "\",";
+
 			if (isset($category)) { 
 				$json_item .= "\"category\":[" . $category_id . "], ";
 			} else {
@@ -225,4 +227,17 @@ class Json_Controller extends Template_Controller
 		echo $sharing_data;
 	}
 
+    private function _id2color($id)
+    {
+        $max = 200;
+        $sep = 15;
+        $num = ($id * $sep) % $max;
+        $c = '';
+        while(strlen($c)<6)
+        {
+            $c .= sprintf("%02X", (($id * $sep) % $max));
+            $sep *= 2;
+        }
+        return $c;
+    }
 }
