@@ -17,6 +17,21 @@
 
 				<!-- main body -->
 				<div id="main" class="clearingfix">
+
+                <?
+                    if (!$user)
+                    {
+                        print '<p /><a href="login"><b>Login</b></a>';
+                    } else {
+                        print 'Welcome '.$user->username . " | <a href=\"admin/log_out\">Logout</a>";
+                        if ($user->has(ORM::factory('role', 'admin')))
+                            print "<p />Welcome <a href=\"/admin\">Admin</a></p>";
+                    }
+                ?>
+
+                    <p />
+                    <a href="signup/page<?= ($user)? "2": "1"; ?>"><b>Request new instance</b></a>
+
 					<div id="mainmiddle" class="floatbox withright">
 				
 						<!-- right column -->
@@ -28,14 +43,15 @@
 							</div>
 						
 							<ul class="category-filters">
-								<li><a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:#<?php echo $default_map_all;?>"></div><div class="category-title">All Categories</div></a></li>
+								<li><a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:#<?php echo $default_map_all;?>"></div><div class="category-title">All Sites</div></a></li>
 								<?php
 									foreach ($categories as $category => $category_info)
 									{
 										$category_title = $category_info[0];
 										$category_color = $category_info[1];
 										echo '<li><a href="#" id="cat_'. $category .'"><div class="swatch" style="background-color:#'.$category_color.'"></div><div class="category-title">'.$category_title.'</div></a></li>';
-										// Get Children
+										//  Children -- not used by MHI currently.
+                                        /**
 										echo '<div class="hide" id="child_'. $category .'">';
 										foreach ($category_info[2] as $child => $child_info)
 										{
@@ -44,6 +60,7 @@
 											echo '<li style="padding-left:20px;"><a href="#" id="cat_'. $child .'"><div class="swatch" style="background-color:#'.$child_color.'"></div><div class="category-title">'.$child_title.'</div></a></li>';
 										}
 										echo '</div>';
+                                        */
 									}
 								?>
 							</ul>
@@ -82,8 +99,32 @@
 							
 							<br />
 						
+                            <!-- current sites -->
+                            <?php
+                                if ($shares)
+                            { ?>
+                            <div class="additional-content">
+                                <strong class="title">HOSTED INSTANCES</strong>
+                                    <div class="grey-box">
+                                    <div class="grey-box-bg">
+                                    <?php
+                                        foreach ($shares as $share => $share_info)
+                                        {
+                                            $sharing_site_name = $share_info[0];
+                                            $sharing_color = $share_info[1];
+                                            $sharing_domain = $share_info[2];
+                                            echo '<li><a href="http://' . $sharing_domain . Kohana::config('settings.hosting_domain').'" target="new"><div class="swatch" style="background-color:#'.$sharing_color.'"></div><div>'.$sharing_site_name.'</div></a></li><br />';
+                                        }
+                                    ?>
+                                    </ul>
+                                </div>    
+                                </div>
+                            </div>    
+                            <?php } ?>
+                            <!-- / shares -->
+                            
 							<!-- additional content -->
-							<div class="additional-content">
+							<!--<div class="additional-content">
 								<h5><?php echo Kohana::lang('ui_main.how_to_report'); ?></h5>
 								<ol>
 									<?php if (!empty($phone_array)) 
@@ -105,7 +146,7 @@
 									<li>By <a href="<?php echo url::base() . 'reports/submit/'; ?>">filling a form</a> at the website</li>
 								</ol>					
 		
-							</div>
+							</div>-->
 							<!-- / additional content -->
 					
 						</div>
@@ -116,7 +157,7 @@
 							<div class="floatbox">
 							
 								<!-- filters -->
-								<div class="filters clearingfix">
+								<!--<div class="filters clearingfix">
 								<div style="float:left; width: 65%">
 									<strong><?php echo Kohana::lang('ui_main.filters'); ?></strong>
 									<ul>
@@ -134,6 +175,7 @@
 										<li><a id="view_1" <?php if($map_enabled === '3dmap') { echo 'class="active" '; } ?>href="#"><span><?php echo Kohana::lang('ui_main.time'); ?></span></a></li>
 </div>
 								</div>
+                                -->
 								<!-- / filters -->
 						
 								<!-- map -->
@@ -214,6 +256,7 @@
 						<!-- / left content block -->
 				
 						<!-- right content block -->
+                        <!--
 						<div class="content-block-right">
 							<h5><?php echo Kohana::lang('ui_main.official_news'); ?></h5>
 							<table class="table-list">
@@ -246,6 +289,7 @@
 							</table>
 							<a class="more" href="<?php echo url::base() . 'feeds' ?>">View More...</a>
 						</div>
+                        -->
 						<!-- / right content block -->
 				
 					</div>

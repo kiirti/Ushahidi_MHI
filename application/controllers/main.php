@@ -24,6 +24,9 @@ class Main_Controller extends Template_Controller {
 
 	// Session instance
 	protected $session;
+
+    // User
+    protected $user;
 	
     public function __construct()
     {
@@ -34,6 +37,12 @@ class Main_Controller extends Template_Controller {
 
 		// Load Session
 		$this->session = Session::instance();
+
+        // User
+        $this->auth = new Auth();
+        $this->auth->auto_login();
+        if(array_key_exists('auth_user', $_SESSION))
+            $this->user = new User_Model($_SESSION['auth_user']->id);
 		
         // Load Header & Footer
         $this->template->header  = new View('header');
@@ -131,31 +140,25 @@ class Main_Controller extends Template_Controller {
     {		
         $this->template->header->this_page = 'home';
         $this->template->content = new View('main');
+        $this->template->content->set("user", $this->user);
 		
+        // What instances to show?
+        $db = new Database();
+        $dbs = array();
+        $show_user = ($this->user)? " OR user_id = ".$this->user->id." ": "";
+        $sites = $db->query("SELECT id,dbdatabase,sitename,subdomain,tagline FROM sites WHERE is_approved AND (is_public $show_user)");
+        $this->template->content->set("sites", $sites);
+
         // Get all active top level categories
         $parent_categories = array();
-        foreach (ORM::factory('category')
-				->where('category_visible', '1')
-				->where('parent_id', '0')
-				->find_all() as $category)
+        foreach ($sites as $category)
         {
-            // Get The Children
-			$children = array();
-			foreach ($category->children as $child)
-			{
-				$children[$child->id] = array( 
-					$child->category_title, 
-					$child->category_color
-				);
-			}
-			
-			// Put it all together
-            $parent_categories[$category->id] = array( 
-				$category->category_title, 
-				$category->category_color,
-				$children
-			);
+            // Create a list of all sites
+            $parent_categories[$category->id] = array( $category->sitename, $this->_id2color($category->id));
+            $shares[$category->id] = array($category->sitename, $this->_id2color($category->id), $category->subdomain);
+            array_push($dbs, $category->dbdatabase);
         }
+
         $this->template->content->categories = $parent_categories;
 
 		// Get all active Layers (KMZ/KML)
@@ -170,14 +173,6 @@ class Main_Controller extends Template_Controller {
 		$this->template->content->layers = $layers;
 		
 		// Get all active Shares
-		$shares = array();
-		foreach (ORM::factory('sharing')
-				  ->where('sharing_active', 1)
-				  ->where('sharing_type', 1)
-				  ->find_all() as $share)
-		{
-			$shares[$share->id] = array($share->sharing_site_name, $share->sharing_color);
-		}
 		$this->template->content->shares = $shares;
 		
         // Get Reports
@@ -233,8 +228,7 @@ class Main_Controller extends Template_Controller {
 		$active_month = 0;
 		$active_startDate = 0;
 		$active_endDate = 0;
-		
-		$db = new Database();
+
 		// First Get The Most Active Month
 		$query = $db->query('SELECT incident_date, count(*) AS incident_count FROM incident WHERE incident_active = 1 GROUP BY DATE_FORMAT(incident_date, \'%Y-%m\') ORDER BY incident_count DESC LIMIT 1');
 		foreach ($query as $query_active)
@@ -375,6 +369,27 @@ class Main_Controller extends Template_Controller {
 		$this->template->header->js = $myPacker->pack();
 	}
 	
+
+    /*
+    * Map a site id to a html color.
+    * @param id int site id.
+    * @return string color in hex form.
+    */
+    private function _id2color($id)
+    {
+        $max = 200;
+        $sep = 15;
+        $num = ($id * $sep) % $max;
+        $c = '';
+        while(strlen($c)<6)
+        {
+            $c .= sprintf("%02X", (($id * $sep) % $max));
+            $sep *= 2;
+        }
+        return $c;
+    }
+
+
 	/*
 	* Ushahidi Stats HTML/JavaScript
     * @return mixed  Return ushahidi stats HTML code.

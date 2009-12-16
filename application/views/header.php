@@ -106,18 +106,16 @@
 		<div id="header">
 	
 			<!-- searchbox -->
+            <!--
 			<div id="searchbox">
 				<a class="share addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pub=xa-4aee423643f8276e">Share</a>
 
-				<!-- languages -->
 				<div class="language-box">
 					<form>
 						<?php print form::dropdown('l', $locales_array, $l, ' onChange="this.form.submit()" '); ?>
 					</form>
 				</div>
-				<!-- / languages -->
 			
-				<!-- searchform -->
 				<div class="search-form">
 					<form method="get" id="search" action="<?php echo url::base() . 'search/'; ?>">
 						<ul>
@@ -126,9 +124,8 @@
 						</ul>
 					</form>
 				</div>
-				<!-- / searchform -->
-		
 			</div>
+            -->
 			<!-- / searchbox -->
 		
 			<!-- logo -->
@@ -139,9 +136,11 @@
 			<!-- / logo -->
 		
 			<!-- submit incident -->
+            <!--
 			<div class="submit-incident clearingfix">
 				<a href="<?php echo url::base() . "reports/submit" ?>"><?php echo Kohana::lang('ui_main.submit'); ?></a>
 			</div>
+            -->
 			<!-- / submit incident -->
 		</div>
 		<!-- / header -->
@@ -151,7 +150,7 @@
 			<div class="background layoutleft">
 		
 				<!-- mainmenu -->
-				<div id="mainmenu" class="clearingfix">
+			<!--	<div id="mainmenu" class="clearingfix">
 					<ul>
 						<li><a href="<?php echo url::base() . "main" ?>" <?php if ($this_page == 'home') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.home'); ?></a></li>
 						<li><a href="<?php echo url::base() . "reports" ?>" <?php if ($this_page == 'reports') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.reports'); ?></a></li>
@@ -183,5 +182,5 @@
 						?>
 					</ul>
 
-				</div>
+				</div> -->
 				<!-- / mainmenu -->
