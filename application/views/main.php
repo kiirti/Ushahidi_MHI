@@ -234,14 +234,17 @@
 									}
 									foreach ($incidents as $incident)
 									{
-										$incident_id = $incident->id;
+										$incident_id = $incident->instance_id;
 										$incident_title = text::limit_chars($incident->incident_title, 40, '...', True);
 										$incident_date = $incident->incident_date;
 										$incident_date = date('M j Y', strtotime($incident->incident_date));
 										$incident_location = $incident->location->location_name;
+                                        $incident_url = str_replace("www", 
+                                            $incident->site->subdomain, url::base())
+                                            . 'reports/view/' . $incident_id;
 									?>
 									<tr>
-										<td><a href="<?php echo url::base() . 'reports/view/' . $incident_id; ?>"> <?php echo $incident_title ?></a></td>
+										<td><a href="<?= $incident_url?>" target="new"> <?php echo $incident_title ?></a></td>
 										<td><?php echo $incident_location ?></td>
 										<td><?php echo $incident_date; ?></td>
 									</tr>
