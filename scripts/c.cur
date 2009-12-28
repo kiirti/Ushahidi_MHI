@@ -1,0 +1,2 @@
+## Get the lastest report
+0,5,10,15,20,25,30,35,40,45,50,55 * * * *   cd /root/kiirti/multiple/mog/Ushahidi_MHI/scripts && php pull_incidents.php >> /tmp/kiirti_reports.log 2>&1

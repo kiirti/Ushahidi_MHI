@@ -962,6 +962,26 @@ CREATE TABLE `sites` (
    added_on       timestamp DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET='binary';
 
+--
+-- Table structure for table `audio_trans`
+--
+
+CREATE TABLE `audio_trans` (
+    id            serial PRIMARY KEY,
+    user_id       bigint(20) unsigned NOT NULL,
+    hit_id        varbinary(255) NOT NULL UNIQUE,
+    hit_group_id  varbinary(255) NOT NULL,
+    filename      varbinary(255) NOT NULL UNIQUE,
+    added_on      timestamp DEFAULT CURRENT_TIMESTAMP,
+    translated_on timestamp,
+    translated    blob NOT NULL DEFAULT "",
+    location      varbinary(255),
+    caller_id     varbinary(255) NOT NULL,
+    call_date     varbinary(255) NOT NULL,
+    call_time     varbinary(255) NOT NULL,
+    call_duration varbinary(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET='binary';
+
 -- --------------------------------------------------------
 
 --

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<QuestionForm xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd">
+    <Overview>
+        <Title>Kiirti Incident Transciption</Title>
+
+        <!-- Here are the guidelines. Recommend keeping these short and crisp. -->
+        <Text>Guidelines:</Text>
+        <List>
+            <ListItem>Listen to the file below. Write an incident report afterwords.</ListItem>
+            <ListItem>Be sure to fill out the location where the incident happens.</ListItem>
+        </List>
+
+        <!-- Here's the clip -->
+        <Text>Clip:</Text>
+        <Binary>
+          <MimeType>
+            <Type>audio</Type>
+            <SubType>mpeg</SubType>
+          </MimeType>
+          <DataURL>${clip_url}</DataURL>
+          <AltText>Incident Clip</AltText>
+        </Binary>
+    </Overview>
+
+    <!-- The code below will create 5 inputs for tags. It will force the first 3 to be mandatory. -->
+        <Question>
+            <QuestionIdentifier>1</QuestionIdentifier>
+                <IsRequired>true</IsRequired>
+            <QuestionContent><Text>Location:</Text></QuestionContent>
+            <AnswerSpecification>
+                <FreeTextAnswer>
+                    <Constraints>
+                        <Length maxLength="50" />
+                    </Constraints>
+                    <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+                </FreeTextAnswer>
+            </AnswerSpecification>
+        </Question>
+        <Question>
+            <QuestionIdentifier>2</QuestionIdentifier>
+                <IsRequired>true</IsRequired>
+            <QuestionContent><Text>Incident Description:</Text></QuestionContent>
+            <AnswerSpecification>
+                <FreeTextAnswer>
+                </FreeTextAnswer>
+            </AnswerSpecification>
+        </Question>
+
+</QuestionForm>
+

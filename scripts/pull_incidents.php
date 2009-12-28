@@ -24,6 +24,7 @@ if (!$result){
 // Then, get top cat list for each site
 // Copy incidents only in this cat
 while($row = mysql_fetch_assoc($result)){
+
   $q1 = sprintf ("BEGIN");
   mysql_query($q1);
   $q2 = sprintf ("DELETE FROM incident WHERE site_id = %s", mysql_real_escape_string($row['id']));
@@ -35,7 +36,7 @@ while($row = mysql_fetch_assoc($result)){
     exit;
   }
   while($cat = mysql_fetch_assoc($rcat)){
-    $q4 = sprintf ("INSERT INTO incident SELECT id+(%s*$mult),location_id+(%s*$mult),form_id,locale,user_id,%s,incident_title,incident_description,incident_date,incident_mode,incident_active,incident_verified,incident_source,incident_information,incident_rating,incident_dateadd,incident_dateadd_gmt,incident_datemodify, id FROM %s.incident WHERE id IN (SELECT incident_id FROM %s.incident AS A JOIN %s.incident_category ON incident_id = A.id WHERE category_id = %s AND incident_active)"
+    $q4 = sprintf ("INSERT INTO incident SELECT id+(%s*$mult),location_id+(%s*$mult),form_id,locale,user_id,%s,incident_title,incident_description,incident_date,incident_mode,incident_active,incident_verified,incident_source,incident_information,incident_rating,incident_dateadd,incident_dateadd_gmt,incident_datemodify, incident_alert_status, id FROM %s.incident WHERE id IN (SELECT incident_id FROM %s.incident AS A JOIN %s.incident_category ON incident_id = A.id WHERE category_id = %s AND incident_active)"
         , mysql_real_escape_string($row['id'])
         , mysql_real_escape_string($row['id'])
         , mysql_real_escape_string($row['id'])
@@ -44,7 +45,11 @@ while($row = mysql_fetch_assoc($result)){
         , mysql_real_escape_string($row['dbdatabase'])
         , mysql_real_escape_string($cat['category_id'])
     );
-    mysql_query($q4);
+    $res = mysql_query($q4);
+    if (!$res){
+      print (mysql_error());
+      exit;
+    }
   }
   mysql_free_result($rcat);
   /**

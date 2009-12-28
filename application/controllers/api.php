@@ -74,6 +74,26 @@ class Api_Controller extends Controller {
 			case "tagnews": //tag a news item to an incident
 			
 			case "tagvideo": //report/add an incident
+
+            case "audio": // add an audio report. We need user id and the file.
+                if(!$this->_verifyArrayIndex($request, 'user')) {
+                    $error = array("error" => 
+                        $this->_getErrorMsg(001, 'user'));
+                    break;
+                }
+                $ret = $this->_uploadAudioForTranscription($request['user'], $request['caller_id'], 
+                        $request['call_date'], $request['call_time'], $request['call_duration']);
+                break;
+
+            case "audio_mkurk":  // accept a description about an audio file from mturk  
+                if(!$this->_verifyArrayIndex($request, 'hit_id')) {
+                    $error = array("error" =>
+                        $this->_getErrorMsg(001, 'hit_id'));
+                    break;
+                }
+                $ret = $this->_AcceptAudioTranscription($request['hit_id'], $request['location_name'],
+                        $request['incident_description']);
+                break;
 			
 			case "tagphoto": //report/add an incident
 				$incidentid = '';
@@ -701,6 +721,7 @@ class Api_Controller extends Controller {
 		);
 		//copy the form as errors, so the errors will be stored with keys corresponding to the form field names
 		$this->messages = $form;		
+
 		// check, has the form been submitted, if so, setup validation
 		if ($_POST) {
 			// Instantiate Validation, use $post, so we don't overwrite $_POST fields with our own things
@@ -782,7 +803,7 @@ class Api_Controller extends Controller {
 				} else { 
 					$categories = explode(",",$post->incident_category);	
 				}
-	 
+
 				if(!empty($categories) && is_array($categories)) {
 					foreach($categories as $item){
 						$incident_category = new Incident_Category_Model();
@@ -887,7 +908,110 @@ class Api_Controller extends Controller {
 			return 2; // Not sent by post method.
 		}
 	}
-	
+
+    /*
+     * Update an audio transcription, and then create an incident report.
+     */
+    function _AcceptAudioTranscription($hit_id, $location, $desc){
+        $hit = ORM::factory('audio_trans', $hit_id);
+        if (!$hit->id){
+            $this->error_messages = "Error -- invalild HitID";
+        } else {
+            $hit->translated = $desc;
+            $hit->location = $location;
+            $hit->translated_on = time();
+            $hit->save();
+        }
+
+         $ret;
+         if (!$this->error_messages)
+           $ret = array("payload" => array("success" => "true"),"error" => $this->_getErrorMsg(0));
+         else
+           $ret = array("payload" => array("success" => "false"),"error" => $this->error_messages);
+         if($this->responseType == 'json'){
+           return json_encode($ret);
+         } else {
+           return $this->_arrayAsXML($ret, array());
+         }
+    }
+
+	/**
+      * Save an uploaded audio file for transcription.
+      */
+    function _uploadAudioForTranscription($username, $caller_id = 0, 
+            $call_date = "01/01/1970", $call_time = "00:00", 
+            $call_duration = "0"){
+
+        // Is the user valid?
+        $user = ORM::factory('user', $username);
+        if (!$user->id){
+            $this->error_messages = "Error -- invalild user";
+        } else {
+          // Process the upload
+          $clip_name = $_FILES["clip"]["name"];
+          $clip = $_FILES["clip"]["tmp_name"];
+
+          // First save the clip
+          $new_clip_name = Kohana::config('settings.audio_storage').'/'.$clip_name;
+
+          // Is the clip unique?
+          $old_c = ORM::factory('audio_trans', $new_clip_name);
+          if($old_c->id){
+            $this->error_messages = "Error -- duplicate file";
+          } else {
+          move_uploaded_file($clip, $new_clip_name);  
+
+          // Load it into mturk
+          $cmd = sprintf("%s %s %s %s %s %s 2>> /tmp/kiirti.err", 
+            Kohana::config('settings.audio_mturk_script'),
+            Kohana::config('settings.audio_question'),
+            escapeshellarg(url::base().Kohana::config('settings.audio_storage').'/'.$clip_name),
+            Kohana::config('settings.audio_mturk_url'),
+            Kohana::config('settings.aws_id'),
+            Kohana::config('settings.aws_sec_id')
+            );
+
+          $output;
+          $retval;
+          $line = exec($cmd, $output, $retval);
+          $results = explode(",", $output[0]);
+          if ($retval){
+            $this->error_messages = file_get_contents("/tmp/kiirti.err");  
+          } else {
+            // Then save the metadata
+            $media = new Audio_Trans_Model();
+            $media->user_id = $user->id;
+            $media->filename = $new_clip_name;
+            $media->hit_id = $results[0];
+            $media->hit_group_id = $results[1];
+            $media->caller_id = $caller_id;
+            $media->call_date = $call_time;
+            $media->call_time = $call_time;
+            $media->call_duration = $call_duration;
+            try {
+              $media->save();
+            } catch (Exception $e) {
+              $this->error_messages = "Error -- duplicate file";  
+            }
+          }
+        }
+        }  
+        $ret;
+        if (!$this->error_messages)
+            $ret = array("payload" => array("success" => "true"),"error" => $this->_getErrorMsg(0),
+                    "hit_id" => $media->hit_id,
+                    "hit_group_id" => $media->hit_group_id,
+                    "preview" => Kohana::config('settings.audio_mturk_preview_url').$media->hit_group_id,
+                    );
+        else
+            $ret = array("payload" => array("success" => "false"),"error" => $this->error_messages);
+        if($this->responseType == 'json'){
+            return json_encode($ret);
+        } else {
+            return $this->_arrayAsXML($ret, array());
+        }
+    }
+
 	/**
  	* Tag a news item to an incident
  	*/
