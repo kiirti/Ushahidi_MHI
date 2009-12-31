@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<QuestionForm xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd">
+    <Overview>
+        <Title>Kiirti Incident Transciption : ${language} To English</Title>
+
+        <!-- Here are the guidelines. Recommend keeping these short and crisp. -->
+        <Text>Guidelines:</Text>
+        <List>
+            <ListItem>Listen to the clips below. Write an incident report afterwords.</ListItem>
+        </List>
+
+    </Overview>
+
+<!-- Address -->
+        <Question>
+            <QuestionIdentifier>address</QuestionIdentifier>
+                <IsRequired>true</IsRequired>
+            <QuestionContent><Text>Address of the reporter:</Text>
+              <EmbeddedBinary>
+                <EmbeddedMimeType>
+                    <Type>audio</Type>
+                    <SubType>mpeg</SubType>
+                </EmbeddedMimeType>
+                <DataURL>${address}</DataURL>
+                <AltText>The reporter's address</AltText>
+                <Width>400</Width>
+                <Height>50</Height>
+                <ApplicationParameter>
+                    <Name>autostart</Name>
+                    <Value>false</Value>
+                </ApplicationParameter>
+                </EmbeddedBinary>
+
+            </QuestionContent>
+            <AnswerSpecification>
+                <FreeTextAnswer>
+                    <Constraints>
+                        <Length maxLength="200" />
+                    </Constraints>
+                    <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+                </FreeTextAnswer>
+            </AnswerSpecification>
+        </Question>
+<!-- date -->
+        <Question>
+            <QuestionIdentifier>date</QuestionIdentifier>
+                <IsRequired>true</IsRequired>
+            <QuestionContent><Text>Date of the incident:</Text>
+              <EmbeddedBinary>
+                <EmbeddedMimeType>
+                    <Type>audio</Type>
+                    <SubType>mpeg</SubType>
+                </EmbeddedMimeType>
+                <DataURL>${date}</DataURL>
+                <AltText>The incident's date</AltText>
+                <Width>400</Width>
+                <Height>50</Height>
+                <ApplicationParameter>
+                    <Name>autostart</Name>
+                    <Value>false</Value>
+                </ApplicationParameter>
+                </EmbeddedBinary>
+            </QuestionContent>
+            <AnswerSpecification>
+                <FreeTextAnswer>
+                    <Constraints>
+                        <AnswerFormatRegex regex="^[12][0-9]{3}-[01]?\d-[0-3]?\d$" 
+                            errorText="You must enter a date with the format yyyy-mm-dd."/> 
+                    </Constraints>
+                <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+                </FreeTextAnswer>
+            </AnswerSpecification>
+        </Question>
+
+<!-- email -->
+<Question>
+            <QuestionIdentifier>email</QuestionIdentifier>
+                <IsRequired>true</IsRequired>
+            <QuestionContent><Text>Email of the reporter:</Text>
+              <EmbeddedBinary>
+                <EmbeddedMimeType>
+                    <Type>audio</Type>
+                    <SubType>mpeg</SubType>
+                </EmbeddedMimeType>
+                <DataURL>${email}</DataURL>
+                <AltText>The reporter's email</AltText>
+                <Width>400</Width>
+                <Height>50</Height>
+                <ApplicationParameter>
+                    <Name>autostart</Name>
+                    <Value>false</Value>
+                </ApplicationParameter>
+                </EmbeddedBinary>
+            </QuestionContent>
+            <AnswerSpecification>
+                <FreeTextAnswer>
+                    <Constraints>
+                        <Length maxLength="100" />
+                    </Constraints>
+                    <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+                </FreeTextAnswer>
+            </AnswerSpecification>
+        </Question>
+
+<!-- location -->
+<Question>
+            <QuestionIdentifier>location</QuestionIdentifier>
+                <IsRequired>true</IsRequired>
+            <QuestionContent><Text>Location of the incident:</Text>
+              <EmbeddedBinary>
+                <EmbeddedMimeType>
+                    <Type>audio</Type>
+                    <SubType>mpeg</SubType>
+                </EmbeddedMimeType>
+                <DataURL>${location}</DataURL>
+                <AltText>The incident's location</AltText>
+                <Width>400</Width>
+                <Height>50</Height>
+                <ApplicationParameter>
+                    <Name>autostart</Name>
+                    <Value>false</Value>
+                </ApplicationParameter>
+                </EmbeddedBinary>
+            </QuestionContent>
+            <AnswerSpecification>
+                <FreeTextAnswer>
+                    <Constraints>
+                        <Length maxLength="200" />
+                    </Constraints>
+                    <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+                </FreeTextAnswer>
+            </AnswerSpecification>
+        </Question>
+
+<!-- name -->
+<Question>
+            <QuestionIdentifier>name</QuestionIdentifier>
+                <IsRequired>true</IsRequired>
+            <QuestionContent><Text>Name of the reporter:</Text>
+              <EmbeddedBinary>
+                <EmbeddedMimeType>
+                    <Type>audio</Type>
+                    <SubType>mpeg</SubType>
+                </EmbeddedMimeType>
+                <DataURL>${name}</DataURL>
+                <AltText>The reporter's name</AltText>
+                <Width>400</Width>
+                <Height>50</Height>
+                <ApplicationParameter>
+                    <Name>autostart</Name>
+                    <Value>false</Value>
+                </ApplicationParameter>
+                </EmbeddedBinary>
+            </QuestionContent>
+            <AnswerSpecification>
+                <FreeTextAnswer>
+                    <Constraints>
+                        <Length maxLength="100" />
+                    </Constraints>
+                    <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+                </FreeTextAnswer>
+            </AnswerSpecification>
+        </Question>
+
+<!-- problem -->
+<Question>
+            <QuestionIdentifier>problem</QuestionIdentifier>
+                <IsRequired>true</IsRequired>
+            <QuestionContent><Text>Problem description:</Text>
+              <EmbeddedBinary>
+                <EmbeddedMimeType>
+                    <Type>audio</Type>
+                    <SubType>mpeg</SubType>
+                </EmbeddedMimeType>
+                <DataURL>${problem}</DataURL>
+                <AltText>Problem</AltText>
+                <Width>400</Width>
+                <Height>50</Height>
+                <ApplicationParameter>
+                    <Name>autostart</Name>
+                    <Value>false</Value>
+                </ApplicationParameter>
+                </EmbeddedBinary>
+            </QuestionContent>
+            <AnswerSpecification>
+                <FreeTextAnswer>
+                    <NumberOfLinesSuggestion>4</NumberOfLinesSuggestion>
+                </FreeTextAnswer>
+            </AnswerSpecification>
+        </Question>
+</QuestionForm>
+

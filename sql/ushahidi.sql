@@ -971,15 +971,21 @@ CREATE TABLE `audio_trans` (
     user_id       bigint(20) unsigned NOT NULL,
     hit_id        varbinary(255) NOT NULL UNIQUE,
     hit_group_id  varbinary(255) NOT NULL,
-    filename      varbinary(255) NOT NULL UNIQUE,
+    basedir       varbinary(255) NOT NULL UNIQUE,
     added_on      timestamp DEFAULT CURRENT_TIMESTAMP,
     translated_on timestamp,
-    translated    blob NOT NULL DEFAULT "",
-    location      varbinary(255),
+    t_address     varbinary(255) NOT NULL,
+    t_date        varbinary(255) NOT NULL,  
+    t_email       varbinary(255) NOT NULL,
+    t_location    varbinary(255) NOT NULL,
+    t_name        varbinary(255) NOT NULL,
+    t_phone       varbinary(255) NOT NULL,
+    t_problem     blob NOT NULL DEFAULT "",
     caller_id     varbinary(255) NOT NULL,
     call_date     varbinary(255) NOT NULL,
     call_time     varbinary(255) NOT NULL,
-    call_duration varbinary(255) NOT NULL
+    call_duration varbinary(255) NOT NULL,
+    language      varbinary(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET='binary';
 
 -- --------------------------------------------------------

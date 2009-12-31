@@ -27,7 +27,7 @@ class Audio_Trans_Model extends ORM
         if ( ! empty($id) AND is_string($id) AND ! ctype_digit($id))
         {
             if (file_exists($id))
-              return 'filename';
+              return 'basedir';
             return 'hit_id';
         }
 

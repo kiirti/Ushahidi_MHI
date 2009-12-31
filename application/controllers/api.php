@@ -82,7 +82,8 @@ class Api_Controller extends Controller {
                     break;
                 }
                 $ret = $this->_uploadAudioForTranscription($request['user'], $request['caller_id'], 
-                        $request['call_date'], $request['call_time'], $request['call_duration']);
+                        $request['call_date'], $request['call_time'], $request['call_duration'], $request['pass'],
+                        $request['language']);
                 break;
 
             case "audio_mkurk":  // accept a description about an audio file from mturk  
@@ -92,7 +93,7 @@ class Api_Controller extends Controller {
                     break;
                 }
                 $ret = $this->_AcceptAudioTranscription($request['hit_id'], $request['location_name'],
-                        $request['incident_description']);
+                        $request['incident_description'], $request['tmp_dir']);
                 break;
 			
 			case "tagphoto": //report/add an incident
@@ -829,9 +830,8 @@ class Api_Controller extends Controller {
 					}
 				}
 				
-				// b. Video
+				// b. Video and Audio
 				if( !empty( $post->incident_video) && is_array( $post->incident_video)){ 
-
 					foreach($post->incident_video as $item) {
 						if(!empty($item)) {
 							$video = new Media_Model();
@@ -844,6 +844,16 @@ class Api_Controller extends Controller {
 						}
 					}
 				}
+
+                if( !empty( $post->incident_audio)){
+                    $audio = new Media_Model();
+                    $audio->location_id = $location->id;
+                    $audio->incident_id = $incident->id;
+                    $audio->media_type = 3;     // Audio
+                    $audio->media_link = $post->incident_audio;
+                    $audio->media_date = date("Y-m-d H:i:s",time());
+                    $audio->save();
+                }
 				
 				// c. Photos
 				if( !empty($post->incident_photo)){
@@ -912,65 +922,103 @@ class Api_Controller extends Controller {
     /*
      * Update an audio transcription, and then create an incident report.
      */
-    function _AcceptAudioTranscription($hit_id, $location, $desc){
+    function _AcceptAudioTranscription($hit_id, $location, $desc, $dir){
         $hit = ORM::factory('audio_trans', $hit_id);
         if (!$hit->id){
             $this->error_messages = "Error -- invalild HitID";
         } else {
-            $hit->translated = $desc;
-            $hit->location = $location;
+            // move the trans over.
+            $trans = $hit->basedir."/trans";
+            if (!is_dir($trans))
+              mkdir($trans);
+
+            rename($dir."/address.txt", $trans."/address.txt");
+            rename($dir."/date.txt", $trans."/date.txt");
+            rename($dir."/email.txt", $trans."/email.txt");
+            rename($dir."/location.txt", $trans."/location.txt");
+            rename($dir."/name.txt", $trans."/name.txt");
+            rename($dir."/problem.txt", $trans."/problem.txt");
+
+            $hit->t_address = file_get_contents($hit->basedir."/trans/address.txt");    
+            $hit->t_date = $_POST['incident_date'];
+            $hit->t_email = file_get_contents($hit->basedir."/trans/email.txt");
+            $hit->t_name = file_get_contents($hit->basedir."/trans/name.txt");
+            $hit->t_problem = file_get_contents($hit->basedir."/trans/problem.txt");
+            $hit->t_location = $location;
             $hit->translated_on = time();
             $hit->save();
         }
 
-         $ret;
-         if (!$this->error_messages)
-           $ret = array("payload" => array("success" => "true"),"error" => $this->_getErrorMsg(0));
-         else
-           $ret = array("payload" => array("success" => "false"),"error" => $this->error_messages);
-         if($this->responseType == 'json'){
-           return json_encode($ret);
-         } else {
-           return $this->_arrayAsXML($ret, array());
-         }
+        if (!$this->error_messages)
+          return $this->_report();  
+
+        $ret = array("payload" => array("success" => "false"),"error" => $this->error_messages);
+        if($this->responseType == 'json'){
+          return json_encode($ret);
+       } else {
+         return $this->_arrayAsXML($ret, array());
+        }
     }
 
+    // Turns a file into an mp3 file.
+    private function _file2mp3($in, $out){
+      $retval = 0;  
+      system("ffmpeg -i ".escapeshellarg($in)." ".escapeshellarg($out) . ">/dev/null" , $retval);
+      return $retval;
+    }
 	/**
       * Save an uploaded audio file for transcription.
       */
     function _uploadAudioForTranscription($username, $caller_id = 0, 
             $call_date = "01/01/1970", $call_time = "00:00", 
-            $call_duration = "0"){
+            $call_duration = "0", $pass, $lang){
 
-        // Is the user valid?
+        $auth = Auth::instance();
         $user = ORM::factory('user', $username);
-        if (!$user->id){
-            $this->error_messages = "Error -- invalild user";
+        if (!$user->id || !$auth->login($user, $pass)){
+            $this->error_messages = "Error -- invalild user or password";
         } else {
           // Process the upload
-          $clip_name = $_FILES["clip"]["name"];
-          $clip = $_FILES["clip"]["tmp_name"];
+          //$address = $_FILES["clip"]["name"];
+          //$address = $_FILES["clip"]["tmp_name"];
 
-          // First save the clip
-          $new_clip_name = Kohana::config('settings.audio_storage').'/'.$clip_name;
+          // First create a new directory.
+          $new_clip_dir = Kohana::config('settings.audio_storage').'/'.$lang;
+          if(!is_dir($new_clip_dir))
+            mkdir($new_clip_dir);    
+
+          $new_name;
+          do {
+            $new_name = sha1(time());
+          } while (is_dir($new_clip_dir . "/" . $new_name));
+          $new_clip_dir .= "/" . $new_name;
+          mkdir($new_clip_dir);
 
           // Is the clip unique?
-          $old_c = ORM::factory('audio_trans', $new_clip_name);
+          $old_c = ORM::factory('audio_trans', $new_clip_dir);
           if($old_c->id){
             $this->error_messages = "Error -- duplicate file";
           } else {
-          move_uploaded_file($clip, $new_clip_name);  
+            // Make sure the files are mp3
+            $this->_file2mp3($_FILES["address"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["address"]["name"]));
+            $this->_file2mp3($_FILES["date"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["date"]["name"]));
+            $this->_file2mp3($_FILES["email"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["email"]["name"]));
+            $this->_file2mp3($_FILES["location"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["location"]["name"]));
+            $this->_file2mp3($_FILES["name"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["name"]["name"]));
+            $this->_file2mp3($_FILES["problem"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["problem"]["name"]));
 
           // Load it into mturk
-          $cmd = sprintf("%s %s %s %s %s %s 2>> /tmp/kiirti.err", 
+          $cmd = sprintf("%s %s %s %s %s %s %s %s 2>> /tmp/kiirti.err", 
             Kohana::config('settings.audio_mturk_script'),
             Kohana::config('settings.audio_question'),
-            escapeshellarg(url::base().Kohana::config('settings.audio_storage').'/'.$clip_name),
+            escapeshellarg(url::base().Kohana::config('settings.audio_storage').'/'.$lang.'/'.$new_name."/"),
             Kohana::config('settings.audio_mturk_url'),
             Kohana::config('settings.aws_id'),
-            Kohana::config('settings.aws_sec_id')
+            Kohana::config('settings.aws_sec_id'),
+            Kohana::config('settings.hit_type_id'),
+            escapeshellarg($lang)
             );
-
+//return $cmd;
           $output;
           $retval;
           $line = exec($cmd, $output, $retval);
@@ -981,13 +1029,15 @@ class Api_Controller extends Controller {
             // Then save the metadata
             $media = new Audio_Trans_Model();
             $media->user_id = $user->id;
-            $media->filename = $new_clip_name;
+            $media->basedir = $new_clip_dir;
             $media->hit_id = $results[0];
             $media->hit_group_id = $results[1];
             $media->caller_id = $caller_id;
-            $media->call_date = $call_time;
+            $media->call_date = $call_date;
             $media->call_time = $call_time;
             $media->call_duration = $call_duration;
+            $media->language = $lang;
+            $media->t_phone = $caller_id;
             try {
               $media->save();
             } catch (Exception $e) {
@@ -1002,6 +1052,7 @@ class Api_Controller extends Controller {
                     "hit_id" => $media->hit_id,
                     "hit_group_id" => $media->hit_group_id,
                     "preview" => Kohana::config('settings.audio_mturk_preview_url').$media->hit_group_id,
+                    "response" => url::base().Kohana::config('settings.audio_storage').'/'.$lang.'/'.$new_name."/trans",
                     );
         else
             $ret = array("payload" => array("success" => "false"),"error" => $this->error_messages);
