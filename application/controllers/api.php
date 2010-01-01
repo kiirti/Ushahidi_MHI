@@ -993,7 +993,7 @@ class Api_Controller extends Controller {
             $this->error_messages = "Error -- invalild user or password";
         } else {
           // First create a new directory.
-          $new_clip_dir = Kohana::config('settings.audio_storage').'/'.$lang;
+          $new_clip_dir = Kohana::config('mturk.audio_storage').'/'.$lang;
           if(!is_dir($new_clip_dir))
             mkdir($new_clip_dir);    
 
@@ -1033,13 +1033,13 @@ class Api_Controller extends Controller {
 
           // Load it into mturk
           $cmd = sprintf("%s %s %s %s %s %s %s %s %s 2>> /tmp/kiirti.err", 
-            Kohana::config('settings.audio_mturk_script'),
-            Kohana::config('settings.audio_question'),
-            escapeshellarg(url::base().Kohana::config('settings.audio_storage').'/'.$lang.'/'.$new_name."/"),
-            Kohana::config('settings.audio_mturk_url'),
-            Kohana::config('settings.aws_id'),
-            Kohana::config('settings.aws_sec_id'),
-            Kohana::config('settings.hit_type_id'),
+            Kohana::config('mturk.audio_mturk_script'),
+            Kohana::config('mturk.audio_question'),
+            escapeshellarg(url::base().Kohana::config('mturk.audio_storage').'/'.$lang.'/'.$new_name."/"),
+            Kohana::config('mturk.audio_mturk_url'),
+            Kohana::config('mturk.aws_id'),
+            Kohana::config('mturk.aws_sec_id'),
+            Kohana::config('mturk.hit_type_id'),
             escapeshellarg($lang),
             escapeshellarg($instances)
             );
@@ -1075,8 +1075,8 @@ class Api_Controller extends Controller {
             $ret = array("payload" => array("success" => "true"),"error" => $this->_getErrorMsg(0),
                     "hit_id" => $media->hit_id,
                     "hit_group_id" => $media->hit_group_id,
-                    "preview" => Kohana::config('settings.audio_mturk_preview_url').$media->hit_group_id,
-                    "response" => url::base().Kohana::config('settings.audio_storage').'/'.$lang.'/'.$new_name."/trans",
+                    "preview" => Kohana::config('mturk.audio_mturk_preview_url').$media->hit_group_id,
+                    "response" => url::base().Kohana::config('mturk.audio_storage').'/'.$lang.'/'.$new_name."/trans",
                     );
         else
             $ret = array("payload" => array("success" => "false"),"error" => $this->error_messages);

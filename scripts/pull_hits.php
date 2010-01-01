@@ -2,7 +2,7 @@
 
 // Pulls the finished hits down for each db.
 define(SYSPATH, "");
-require("application/config/settings.php");
+require("application/config/mturk.php");
 
 // Get the hits
 $cmd = sprintf("%s %s %s %s 2>> /tmp/kiirti_review_hits.err",
