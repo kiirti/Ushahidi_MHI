@@ -1,28 +1,8 @@
 <?php
 
 // Pulls the finished hits down for each db.
-
 define(SYSPATH, "");
 require("application/config/settings.php");
-
-$mhi_db = array(
-  'user'     => 'emoksha',
-  'password' => 'em0ksh2',
-  'host'     => 'kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com',
-  'port'     => '3306',
-  'database' => 'mhidb'
-);
-
-$mhi_link = mysql_connect($mhi_db['host'].':'.$mhi_db['port'], $mhi_db['user'], $mhi_db['password']);
-mysql_select_db($mhi_db['database']);
-
-$query = sprintf ("SELECT id,dbdatabase,subdomain FROM `sites` WHERE is_approved AND is_public");
-$result = mysql_query($query);
-
-if (!$result){
-  print (mysql_error());
-  exit;
-}
 
 // Get the hits
 $cmd = sprintf("%s %s %s %s 2>> /tmp/kiirti_review_hits.err",
@@ -48,8 +28,8 @@ foreach ($output as $answer){
   // Default info
   $lat = 0;
   $lon = 0;
-  $date_raw = strtotime(file_get_contents($dir."/date.txt"));
-  $date_fm = date("m/d/Y", time());
+  $date_raw = strtotime(trim(file_get_contents($dir."/date.txt")));
+  $date_fm = date("m/d/Y", $date_raw);
   $hour = "12";
   $min = "00";
   $ampm = "pm";
@@ -61,11 +41,11 @@ foreach ($output as $answer){
   // Then, post the result via the api into an incident.
   //$url = "http://".$row['subdomain'].".kiirti.org/api";
   $url = "http://www.kiirti.org/api";
- 
+  $person_name = explode(" ", trim(file_get_contents($dir."/name.txt")), 2);
   $data = array();
   $data['task'] = "audio_mkurk";
-  $data['location_name'] = file_get_contents($dir."/location.txt");
-  $data['incident_description'] = file_get_contents($dir."/problem.txt");
+  $data['location_name'] = trim(file_get_contents($dir."/location.txt"));
+  $data['incident_description'] = trim(file_get_contents($dir."/problem.txt"));
   $data['latitude'] = $lat;
   $data['longitude'] = $lon;
   $data['incident_title'] = $title;
@@ -74,8 +54,12 @@ foreach ($output as $answer){
   $data['incident_hour'] = $hour;
   $data['incident_minute'] = $min;
   $data['incident_ampm'] = $ampm;
+  $data['person_first'] = $person_name[0];
+  $data['person_last'] = $person_name[1]; 
+  $data['person_email'] = trim(file_get_contents($dir."/email.txt"));
   $data['hit_id'] = $hit_id;
   $data['tmp_dir'] = $dir;
+  $data['instance'] = trim(file_get_contents($dir."/instance.txt"));
 
   //unlink($desc);
   //print_r($data);
@@ -103,8 +87,6 @@ foreach ($output as $answer){
   }
 //}
 }
-//mysql_free_result($result);
-mysql_close($mhi_link);
 
 //}
 

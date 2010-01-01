@@ -12,6 +12,7 @@ my $aws_ak = $ARGV[3];
 my $aws_sk = $ARGV[4];
 my $hit_type = $ARGV[5];
 my $language = $ARGV[6];
+my $instances = $ARGV[7];
 
 # Create a new MechTurk client
 my $mturk = Net::Amazon::MechanicalTurk->new(
@@ -34,13 +35,30 @@ my $email = $clip_url."email.mp3";
 my $location = $clip_url."location.mp3";
 my $name = $clip_url."name.mp3";
 my $problem = $clip_url."problem.mp3";
+my $phone = $clip_url."phone.mp3";
 $question =~ s/\$\{address\}/$addr/;
 $question =~ s/\$\{date\}/$date/;
 $question =~ s/\$\{email\}/$email/;
 $question =~ s/\$\{location\}/$location/;
 $question =~ s/\$\{name\}/$name/;
 $question =~ s/\$\{problem\}/$problem/;
+$question =~ s/\$\{phone\}/$phone/;
 $question =~ s/\$\{language\}/$language/;
+
+## setup the right instances.
+my @instances = split(/,,,/, $instances);
+my $sections = "";
+
+foreach my $instance (@instances){
+  my ($name, $desc) = split(/\|\|\|/, $instance);
+  $sections .= "
+<Selection>
+  <SelectionIdentifier>$name</SelectionIdentifier>
+  <Text>$desc</Text>
+</Selection>
+";
+}
+$question =~ s/\$\{instances\}/$sections/;
 
 my $result = $mturk->CreateHIT(
     Title       => 'Transcribe an incident report',
@@ -52,8 +70,8 @@ my $result = $mturk->CreateHIT(
     #    Amount       => 0.00
     #},
     RequesterAnnotation         => 'Test Kiirti Hit',
-    #AssignmentDurationInSeconds => 60 * 60,
-    #AutoApprovalDelayInSeconds  => 60 * 60 * 10,
+    AssignmentDurationInSeconds => 60 * 60,
+    AutoApprovalDelayInSeconds  => 60 * 60 * 10,
     MaxAssignments              => 1,
     LifetimeInSeconds           => 60 * 60,
     Question                    => $question

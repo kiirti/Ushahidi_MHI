@@ -970,6 +970,7 @@ CREATE TABLE `audio_trans` (
     id            serial PRIMARY KEY,
     user_id       bigint(20) unsigned NOT NULL,
     hit_id        varbinary(255) NOT NULL UNIQUE,
+    site_id       bigint(20) unsigned NOT NULL,   
     hit_group_id  varbinary(255) NOT NULL,
     basedir       varbinary(255) NOT NULL UNIQUE,
     added_on      timestamp DEFAULT CURRENT_TIMESTAMP,

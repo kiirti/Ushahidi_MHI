@@ -81,9 +81,8 @@ class Api_Controller extends Controller {
                         $this->_getErrorMsg(001, 'user'));
                     break;
                 }
-                $ret = $this->_uploadAudioForTranscription($request['user'], $request['caller_id'], 
-                        $request['call_date'], $request['call_time'], $request['call_duration'], $request['pass'],
-                        $request['language']);
+                $ret = $this->_uploadAudioForTranscription($request['user'], $request['pass'], $request['language'],
+                        $request['caller_id'], $request['call_date'], $request['call_time'], $request['call_duration']);
                 break;
 
             case "audio_mkurk":  // accept a description about an audio file from mturk  
@@ -93,7 +92,7 @@ class Api_Controller extends Controller {
                     break;
                 }
                 $ret = $this->_AcceptAudioTranscription($request['hit_id'], $request['location_name'],
-                        $request['incident_description'], $request['tmp_dir']);
+                        $request['incident_description'], $request['tmp_dir'], $request['instance']);
                 break;
 			
 			case "tagphoto": //report/add an incident
@@ -922,10 +921,11 @@ class Api_Controller extends Controller {
     /*
      * Update an audio transcription, and then create an incident report.
      */
-    function _AcceptAudioTranscription($hit_id, $location, $desc, $dir){
+    function _AcceptAudioTranscription($hit_id, $location, $desc, $dir, $instance){
         $hit = ORM::factory('audio_trans', $hit_id);
-        if (!$hit->id){
-            $this->error_messages = "Error -- invalild HitID";
+        $site = ORM::factory('site', $instance);
+        if (!$hit->id || !$site->id){
+            $this->error_messages = "Error -- invalild HitID or Instance";
         } else {
             // move the trans over.
             $trans = $hit->basedir."/trans";
@@ -938,19 +938,34 @@ class Api_Controller extends Controller {
             rename($dir."/location.txt", $trans."/location.txt");
             rename($dir."/name.txt", $trans."/name.txt");
             rename($dir."/problem.txt", $trans."/problem.txt");
+            rename($dir."/phone.txt", $trans."/phone.txt");
+            rename($dir."/instance.txt", $trans."/instance.txt");
 
-            $hit->t_address = file_get_contents($hit->basedir."/trans/address.txt");    
+            $hit->t_address = trim(file_get_contents($hit->basedir."/trans/address.txt"));    
             $hit->t_date = $_POST['incident_date'];
-            $hit->t_email = file_get_contents($hit->basedir."/trans/email.txt");
-            $hit->t_name = file_get_contents($hit->basedir."/trans/name.txt");
-            $hit->t_problem = file_get_contents($hit->basedir."/trans/problem.txt");
+            $hit->t_email = trim(file_get_contents($hit->basedir."/trans/email.txt"));
+            $hit->t_name = trim(file_get_contents($hit->basedir."/trans/name.txt"));
+            $hit->t_problem = trim(file_get_contents($hit->basedir."/trans/problem.txt"));
+            $hit->t_phone = trim(file_get_contents($hit->basedir."/trans/phone.txt"));
+            $hit->site_id = $site->id;
             $hit->t_location = $location;
             $hit->translated_on = time();
             $hit->save();
         }
 
-        if (!$this->error_messages)
-          return $this->_report();  
+        if (!$this->error_messages){
+            $url = 'http://' . $site->subdomain . Kohana::config('settings.hosting_domain') . "/api";
+            $data = $_POST;
+            $data['task'] = "report";
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1 );
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data );
+            $http_result = curl_exec($ch);
+            curl_close($ch);
+            return $http_result;  
+        }
 
         $ret = array("payload" => array("success" => "false"),"error" => $this->error_messages);
         if($this->responseType == 'json'){
@@ -969,19 +984,14 @@ class Api_Controller extends Controller {
 	/**
       * Save an uploaded audio file for transcription.
       */
-    function _uploadAudioForTranscription($username, $caller_id = 0, 
-            $call_date = "01/01/1970", $call_time = "00:00", 
-            $call_duration = "0", $pass, $lang){
+    function _uploadAudioForTranscription($username, $pass, $lang,  
+            $caller_id = 0, $call_date = "01/01/1970", $call_time = "00:00", $call_duration = "0"){
 
         $auth = Auth::instance();
         $user = ORM::factory('user', $username);
         if (!$user->id || !$auth->login($user, $pass)){
             $this->error_messages = "Error -- invalild user or password";
         } else {
-          // Process the upload
-          //$address = $_FILES["clip"]["name"];
-          //$address = $_FILES["clip"]["tmp_name"];
-
           // First create a new directory.
           $new_clip_dir = Kohana::config('settings.audio_storage').'/'.$lang;
           if(!is_dir($new_clip_dir))
@@ -1006,9 +1016,23 @@ class Api_Controller extends Controller {
             $this->_file2mp3($_FILES["location"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["location"]["name"]));
             $this->_file2mp3($_FILES["name"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["name"]["name"]));
             $this->_file2mp3($_FILES["problem"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["problem"]["name"]));
+            $this->_file2mp3($_FILES["phone"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["phone"]["name"]));
+
+          // Get the list of current instances 
+          $db = new Database();
+          $dbs = array();
+          $sites = $db->query("SELECT subdomain,sitename FROM sites WHERE is_approved AND is_public");
+          $instances = "";
+          $first = true;
+          foreach ($sites as $site){
+            if (!$first)
+              $instances .= ",,,";
+            $instances .= $site->subdomain."|||".$site->sitename;
+            $first = false;
+          }
 
           // Load it into mturk
-          $cmd = sprintf("%s %s %s %s %s %s %s %s 2>> /tmp/kiirti.err", 
+          $cmd = sprintf("%s %s %s %s %s %s %s %s %s 2>> /tmp/kiirti.err", 
             Kohana::config('settings.audio_mturk_script'),
             Kohana::config('settings.audio_question'),
             escapeshellarg(url::base().Kohana::config('settings.audio_storage').'/'.$lang.'/'.$new_name."/"),
@@ -1016,7 +1040,8 @@ class Api_Controller extends Controller {
             Kohana::config('settings.aws_id'),
             Kohana::config('settings.aws_sec_id'),
             Kohana::config('settings.hit_type_id'),
-            escapeshellarg($lang)
+            escapeshellarg($lang),
+            escapeshellarg($instances)
             );
 //return $cmd;
           $output;
@@ -1037,7 +1062,6 @@ class Api_Controller extends Controller {
             $media->call_time = $call_time;
             $media->call_duration = $call_duration;
             $media->language = $lang;
-            $media->t_phone = $caller_id;
             try {
               $media->save();
             } catch (Exception $e) {

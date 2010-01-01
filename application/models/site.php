@@ -33,9 +33,12 @@ class Site_Model extends ORM
 	}
 
 	/**
-	 * Allows a model to be loaded by sitename.
+	 * Allows a model to be loaded by subdomain.
 	 */
 	public function unique_key($id) {
+      if ( !empty($id) AND is_string($id) AND !ctype_digit($id))
+        return 'subdomain';
+
 	  return parent::unique_key($id);
 	}
 

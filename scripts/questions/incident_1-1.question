@@ -14,7 +14,7 @@
 <!-- Address -->
         <Question>
             <QuestionIdentifier>address</QuestionIdentifier>
-                <IsRequired>true</IsRequired>
+                <IsRequired>false</IsRequired>
             <QuestionContent><Text>Address of the reporter:</Text>
               <EmbeddedBinary>
                 <EmbeddedMimeType>
@@ -75,7 +75,7 @@
 <!-- email -->
 <Question>
             <QuestionIdentifier>email</QuestionIdentifier>
-                <IsRequired>true</IsRequired>
+                <IsRequired>false</IsRequired>
             <QuestionContent><Text>Email of the reporter:</Text>
               <EmbeddedBinary>
                 <EmbeddedMimeType>
@@ -96,6 +96,8 @@
                 <FreeTextAnswer>
                     <Constraints>
                         <Length maxLength="100" />
+                        <AnswerFormatRegex regex="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" 
+                            errorText="Must be a valid email address."/> 
                     </Constraints>
                     <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
                 </FreeTextAnswer>
@@ -162,8 +164,39 @@
             </AnswerSpecification>
         </Question>
 
-<!-- problem -->
+<!-- phone -->
 <Question>
+            <QuestionIdentifier>phone</QuestionIdentifier>
+                <IsRequired>false</IsRequired>
+            <QuestionContent><Text>Phone of the reporter:</Text>
+              <EmbeddedBinary>
+                <EmbeddedMimeType>
+                    <Type>audio</Type>
+                    <SubType>mpeg</SubType>
+                </EmbeddedMimeType>
+                <DataURL>${phone}</DataURL>
+                <AltText>The reporter's phone number</AltText>
+                <Width>400</Width>
+                <Height>50</Height>
+                <ApplicationParameter>
+                    <Name>autostart</Name>
+                    <Value>false</Value>
+                </ApplicationParameter>
+                </EmbeddedBinary>
+            </QuestionContent>
+            <AnswerSpecification>
+                <FreeTextAnswer>
+                    <Constraints>
+                        <IsNumeric/>
+                        <Length maxLength="100" />
+                    </Constraints>
+                    <NumberOfLinesSuggestion>1</NumberOfLinesSuggestion>
+                </FreeTextAnswer>
+            </AnswerSpecification>
+        </Question>
+
+<!-- problem -->
+        <Question>
             <QuestionIdentifier>problem</QuestionIdentifier>
                 <IsRequired>true</IsRequired>
             <QuestionContent><Text>Problem description:</Text>
@@ -186,6 +219,22 @@
                 <FreeTextAnswer>
                     <NumberOfLinesSuggestion>4</NumberOfLinesSuggestion>
                 </FreeTextAnswer>
+            </AnswerSpecification>
+        </Question>
+
+<!-- Best instance to post to -->
+        <Question>
+            <QuestionIdentifier>instance</QuestionIdentifier>
+                <IsRequired>true</IsRequired>
+            <QuestionContent><Text>Choose the best instance to post this report to:</Text>
+            </QuestionContent>
+            <AnswerSpecification>
+                <SelectionAnswer>
+                    <StyleSuggestion>dropdown</StyleSuggestion>
+                    <Selections>
+                        ${instances}
+                    </Selections>  
+                </SelectionAnswer>
             </AnswerSpecification>
         </Question>
 </QuestionForm>
