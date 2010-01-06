@@ -932,14 +932,14 @@ class Api_Controller extends Controller {
             if (!is_dir($trans))
               mkdir($trans);
 
-            rename($dir."/address.txt", $trans."/address.txt");
-            rename($dir."/date.txt", $trans."/date.txt");
-            rename($dir."/email.txt", $trans."/email.txt");
-            rename($dir."/location.txt", $trans."/location.txt");
-            rename($dir."/name.txt", $trans."/name.txt");
-            rename($dir."/problem.txt", $trans."/problem.txt");
-            rename($dir."/phone.txt", $trans."/phone.txt");
-            rename($dir."/instance.txt", $trans."/instance.txt");
+            copy($dir."/address.txt", $trans."/address.txt");
+            copy($dir."/date.txt", $trans."/date.txt");
+            copy($dir."/email.txt", $trans."/email.txt");
+            copy($dir."/location.txt", $trans."/location.txt");
+            copy($dir."/name.txt", $trans."/name.txt");
+            copy($dir."/problem.txt", $trans."/problem.txt");
+            copy($dir."/phone.txt", $trans."/phone.txt");
+            copy($dir."/instance.txt", $trans."/instance.txt");
 
             $hit->t_address = trim(file_get_contents($hit->basedir."/trans/address.txt"));    
             $hit->t_date = $_POST['incident_date'];

@@ -76,7 +76,9 @@ foreach ($output as $answer){
   $http_code = curl_getinfo($ch ,CURLINFO_HTTP_CODE);
   curl_close($ch);
   print "$http_result\n\n";
+  exec("rm $dir/*");
   rmdir($dir);
+
   if ($error) {
         print "Error: $error\n";
   } else {
