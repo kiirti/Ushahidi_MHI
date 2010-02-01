@@ -30,6 +30,8 @@ class Json_Controller extends Template_Controller
         $json_array = array();
         $cat_array = array();
         $color = Kohana::config('settings.default_map_all');
+        $root_subdir = Kohana::config('settings.base_subdomain');
+        $root_replace = Kohana::config('settings.base_replace');
 		$icon = "";
 
 		$category_id = "";
@@ -127,7 +129,7 @@ class Json_Controller extends Template_Controller
             $json_item .= "\"properties\": {";
 			$json_item .= "\"id\": \"".$marker->id."\", \n";
 
-            $url_base = str_replace("www", $marker->site->subdomain, url::base());
+            $url_base = str_replace($root_subdir, $marker->site->subdomain.$root_replace, url::base());
             $json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href='" .  $url_base . "reports/view/" . $marker->instance_id . "' target='new'>" . htmlentities($marker->incident_title) . "</a>")) . "\",";
 
 			if (isset($category)) { 
@@ -161,6 +163,7 @@ class Json_Controller extends Template_Controller
 			array_push($json_array, $json_item_first);
 		}
         $json = implode(",", $json_array);
+        file_put_contents("/tmp/json", $json);
 
 		header('Content-type: application/json');
         $this->template->json = $json;
