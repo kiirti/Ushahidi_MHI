@@ -5,7 +5,7 @@ define(SYSPATH, "");
 require("application/config/mturk.php");
 
 // Get the hits
-$cmd = sprintf("%s %s %s %s 2>> /tmp/kiirti_review_hits.err",
+$cmd = sprintf("%s %s %s %s 2>> /mnt/kiirti/logs/kiirti_review_hits.err",
     $config['audio_mturk_results_script'],
     $config['audio_mturk_url'],
     $config['aws_id'],

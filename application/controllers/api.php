@@ -1010,13 +1010,13 @@ class Api_Controller extends Controller {
             $this->error_messages = "Error -- duplicate file";
           } else {
             // Make sure the files are mp3
-            $this->_file2mp3($_FILES["address"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["address"]["name"]));
-            $this->_file2mp3($_FILES["date"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["date"]["name"]));
-            $this->_file2mp3($_FILES["email"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["email"]["name"]));
-            $this->_file2mp3($_FILES["location"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["location"]["name"]));
-            $this->_file2mp3($_FILES["name"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["name"]["name"]));
-            $this->_file2mp3($_FILES["problem"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["problem"]["name"]));
-            $this->_file2mp3($_FILES["phone"]["tmp_name"], preg_replace("/\....$/", ".mp3", $new_clip_dir."/".$_FILES["phone"]["name"]));
+            $this->_file2mp3($_FILES["address"]["tmp_name"], $new_clip_dir."/address.mp3");
+            $this->_file2mp3($_FILES["date"]["tmp_name"], $new_clip_dir."/date.mp3");
+            $this->_file2mp3($_FILES["email"]["tmp_name"], $new_clip_dir."/email.mp3");
+            $this->_file2mp3($_FILES["location"]["tmp_name"], $new_clip_dir."/location.mp3");
+            $this->_file2mp3($_FILES["name"]["tmp_name"], $new_clip_dir."/name.mp3");
+            $this->_file2mp3($_FILES["problem"]["tmp_name"], $new_clip_dir."/problem.mp3");
+            $this->_file2mp3($_FILES["phone"]["tmp_name"], $new_clip_dir."/phone.mp3");
 
           // Get the list of current instances 
           $db = new Database();
@@ -1032,7 +1032,7 @@ class Api_Controller extends Controller {
           }
 
           // Load it into mturk
-          $cmd = sprintf("%s %s %s %s %s %s %s %s %s 2>> /tmp/kiirti.err", 
+          $cmd = sprintf("%s %s %s %s %s %s %s %s %s 2>> /mnt/kiirti/logs/kiirti.err", 
             Kohana::config('mturk.audio_mturk_script'),
             Kohana::config('mturk.audio_question'),
             escapeshellarg(url::base().Kohana::config('mturk.audio_storage').'/'.$lang.'/'.$new_name."/"),
