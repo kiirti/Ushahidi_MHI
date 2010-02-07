@@ -954,7 +954,7 @@ class Api_Controller extends Controller {
         }
 
         if (!$this->error_messages){
-            $url = 'http://' . $site->subdomain . Kohana::config('settings.hosting_domain') . "/api";
+            $url = 'http://' . $site->subdomain . Kohana::config('mhi.hosting_domain') . "/api";
             $data = $_POST;
             $data['task'] = "report";
             $ch = curl_init();
@@ -1032,7 +1032,7 @@ class Api_Controller extends Controller {
           }
 
           // Load it into mturk
-          $cmd = sprintf("%s %s %s %s %s %s %s %s %s 2>> /mnt/kiirti/logs/kiirti.err", 
+          $cmd = sprintf("%s %s %s %s %s %s %s %s %s 2>> %s", 
             Kohana::config('mturk.audio_mturk_script'),
             Kohana::config('mturk.audio_question'),
             escapeshellarg(url::base().Kohana::config('mturk.audio_storage').'/'.$lang.'/'.$new_name."/"),
@@ -1041,15 +1041,16 @@ class Api_Controller extends Controller {
             Kohana::config('mturk.aws_sec_id'),
             Kohana::config('mturk.hit_type_id'),
             escapeshellarg($lang),
-            escapeshellarg($instances)
+            escapeshellarg($instances),
+            Kohana::config('mhi.audio_err_log')
             );
-//return $cmd;
+
           $output;
           $retval;
           $line = exec($cmd, $output, $retval);
           $results = explode(",", $output[0]);
           if ($retval){
-            $this->error_messages = file_get_contents("/tmp/kiirti.err");  
+            $this->error_messages = file_get_contents(Kohana::config('mhi.audio_err_log'));  
           } else {
             // Then save the metadata
             $media = new Audio_Trans_Model();

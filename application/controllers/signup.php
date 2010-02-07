@@ -132,7 +132,7 @@ class Signup_Controller extends Main_Controller {
 		$this->site->tagline = $post['tagline'];
         $this->site->dbuser = $this->user->username;
         $this->site->dbpass = $this->user->password;
-        $this->site->dbhost = Kohana::config('settings.instance_dbhost');
+        $this->site->dbhost = Kohana::config('mhi.instance_dbhost');
         $this->site->dbdatabase = $post['subdomain']."_instancedb";
 		$this->site->save();
         url::redirect('/signup/page3/'.$this->site->id);
@@ -158,7 +158,7 @@ class Signup_Controller extends Main_Controller {
 	$site = ORM::factory('site', $id);
 
     // And dispaly the link to the new site.
-	$view->set("newsite", ($site->subdomain).Kohana::config('settings.hosting_domain'));
+	$view->set("newsite", ($site->subdomain).Kohana::config('mhi.hosting_domain'));
 	$this->template->content = $view;
   }
 

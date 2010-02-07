@@ -63,7 +63,7 @@ class Instances_Controller extends Admin_Controller {
     $user = ORM::factory('user', $site->user_id);
 
     // setup the site.
-    $cmd = getcwd() . Kohana::config('settings.create_db');
+    $cmd = getcwd() . Kohana::config('mhi.create_db');
     $cmd .= " " . escapeshellarg($site->dbuser) . " " 
         . escapeshellarg($site->dbpass) 
         . " " . escapeshellarg($site->dbdatabase)
@@ -72,10 +72,10 @@ class Instances_Controller extends Admin_Controller {
         . " " . escapeshellarg($user->email)
         . " " . escapeshellarg($site->sitename)
         . " " . escapeshellarg($site->tagline)
-        . " >> " . Kohana::config('settings.create_db_log')
+        . " >> " . Kohana::config('mhi.create_db_log')
         . " 2>&1";
 
-    file_put_contents(Kohana::config('settings.create_db_log'), "\n\n---------\n$cmd", FILE_APPEND);
+    file_put_contents(Kohana::config('mhi.create_db_log'), "\n\n---------\n$cmd", FILE_APPEND);
     system($cmd);
 
     // tell the user about this. 

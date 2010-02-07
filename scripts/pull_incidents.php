@@ -1,11 +1,14 @@
 <?php
 
+define(SYSPATH, "");
+require("application/config/mhi.php");
+
 $mhi_db = array(
-  'user'     => 'emoksha',
-  'password' => 'em0ksh2',
-  'host'     => 'kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com',
-  'port'     => '3306',
-  'database' => 'mhidb'
+  'user'     => $config['user'],
+  'password' => $config['password'],
+  'host'     => $config['host'],
+  'port'     => $config['port'],
+  'database' => $config['database']
 );
 
 $mult = 1000;

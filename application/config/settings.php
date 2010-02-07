@@ -7,11 +7,6 @@
 $config = array
 (
 	'site_name' => 'Ushahidi MHI',
-    'hosting_domain' => '.kiirti.org',
-    'deployments' => '/root/kiirti/multiple/deployments',
-    'instance_dbhost' => 'kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com',
-    'create_db' => '/scripts/create_instance.sh',
-    'create_db_log' => '/tmp/kiirti.log',
 	'site_email' => '',
 	'default_map' => '',
 	'api_google' => '',

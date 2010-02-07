@@ -113,7 +113,7 @@
                                             $sharing_site_name = $share_info[0];
                                             $sharing_color = $share_info[1];
                                             $sharing_domain = $share_info[2];
-                                            echo '<li><a href="http://' . $sharing_domain . Kohana::config('settings.hosting_domain').'" target="new"><div class="swatch" style="background-color:#'.$sharing_color.'"></div><div>'.$sharing_site_name.'</div></a></li><br />';
+                                            echo '<li><a href="http://' . $sharing_domain . Kohana::config('mhi.hosting_domain').'" target="new"><div class="swatch" style="background-color:#'.$sharing_color.'"></div><div>'.$sharing_site_name.'</div></a></li><br />';
                                         }
                                     ?>
                                     </ul>
