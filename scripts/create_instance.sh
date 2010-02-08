@@ -13,13 +13,7 @@ site_name=$7
 site_tagline=$8
 
 # how to connect
-super_admin="admin"
-super_db="mhidb"
-dbuser="emoksha"
-dbpass="em0ksh2"
-dbhost="kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com"
-dbscript="/root/kiirti/multiple/instances/sql/ushahidi.sql"
-site_host="domU-12-31-38-01-BC-B1.compute-1.internal"
+. scripts/create_instance.sh.local
 
 if [ "$name" == "" ]; then
 echo "usage: create_instance.sh user pass dbname"
