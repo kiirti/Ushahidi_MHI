@@ -609,7 +609,8 @@
 					zoom_point = zoom_point_sm.transform(proj_900913, proj_4326);
 					lon = zoom_point.lon;
 					lat = zoom_point.lat;
-					content = content + "\n<div class=\"infowindow_meta\"><a href=\"<?php echo url::base() . 'reports/?lon="+ lon + "&lat="+ lat +"' ?>\">View&nbsp;Events</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='javascript:zoomToSelectedFeature("+lon_sm+","+lat_sm+")'>Zoom&nbsp;In</a></div>";
+					content = content + "\n<div class=\"infowindow_meta\">";
+					content = content + "<a href='javascript:zoomToSelectedFeature("+lon_sm+","+lat_sm+")'>Zoom&nbsp;In</a></div>";
 				}
 				content = content + "</div>";
 			} else {

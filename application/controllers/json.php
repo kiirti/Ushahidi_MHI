@@ -163,6 +163,7 @@ class Json_Controller extends Template_Controller
 			array_push($json_array, $json_item_first);
 		}
         $json = implode(",", $json_array);
+        file_put_contents("/tmp/json", $json);
 
 		header('Content-type: application/json');
         $this->template->json = $json;

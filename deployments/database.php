@@ -10,7 +10,7 @@ $site = array_shift(explode(".", $_SERVER['HTTP_X_FORWARDED_HOST']));
 $mhi_db = array(
   'user'     => 'mhiuser',
   'password' => 'mhiword',
-  'host'     => 'kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com',
+  'host'     => 'localhost',
   'port'     => '3306',
   'database' => 'mhidb'
 );

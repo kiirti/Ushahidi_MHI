@@ -6,4 +6,5 @@ media/uploads/*
 application/config/config.php
 application/config/database.php
 application/config/mturk.php
-
+scripts/create_instance.sh.local
+audio

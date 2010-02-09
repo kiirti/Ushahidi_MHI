@@ -148,6 +148,7 @@ class Main_Controller extends Template_Controller {
         $show_user = ($this->user)? " OR user_id = ".$this->user->id." ": "";
         $sites = $db->query("SELECT id,dbdatabase,sitename,subdomain,tagline FROM sites WHERE is_approved AND (is_public $show_user)");
         $this->template->content->set("sites", $sites);
+        $shares = array();
 
         // Get all active top level categories
         $parent_categories = array();
