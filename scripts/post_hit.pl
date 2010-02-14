@@ -73,7 +73,7 @@ my $result = $mturk->CreateHIT(
     AssignmentDurationInSeconds => 60 * 60,
     AutoApprovalDelayInSeconds  => 60 * 60 * 10,
     MaxAssignments              => 1,
-    LifetimeInSeconds           => 60 * 60,
+    LifetimeInSeconds           => 7 * 24 * 60 * 60,
     Question                    => $question
 );
 
