@@ -1032,6 +1032,12 @@ class Api_Controller extends Controller {
           }
 
           // Load it into mturk
+          $lang_keys = Kohana::config('mturk.language_keys');
+          $new_lang = $lang;
+          if ($lang_keys[$lang]){
+            $new_lang = $lang_keys[$lang];
+          }
+
           $cmd = sprintf("%s %s %s %s %s %s %s %s %s 2>> %s", 
             Kohana::config('mturk.audio_mturk_script'),
             Kohana::config('mturk.audio_question'),
@@ -1040,7 +1046,7 @@ class Api_Controller extends Controller {
             Kohana::config('mturk.aws_id'),
             Kohana::config('mturk.aws_sec_id'),
             Kohana::config('mturk.hit_type_id'),
-            escapeshellarg($lang),
+            escapeshellarg($new_lang),
             escapeshellarg($instances),
             Kohana::config('mhi.audio_err_log')
             );
