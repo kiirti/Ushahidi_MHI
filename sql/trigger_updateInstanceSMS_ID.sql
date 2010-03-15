@@ -7,4 +7,4 @@ FOR EACH ROW BEGIN
 SET NEW.InstanceSMS_ID = NEW.id;
 END
 |
-delimiter;
+delimiter ;
