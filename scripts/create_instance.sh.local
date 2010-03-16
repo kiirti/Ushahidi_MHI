@@ -1,0 +1,10 @@
+
+# how to connect
+super_admin="admin"
+super_db="mhidb"
+dbuser="root"
+dbpass="em0ksh2"
+dbhost="localhost"
+dbscript="/root/kiirti/multiple/instances/sql/ushahidi.sql"
+site_host="localhost"
+

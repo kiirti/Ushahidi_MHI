@@ -36,7 +36,7 @@ while($row = mysql_fetch_assoc($result)){
     exit;
   }
   while($cat = mysql_fetch_assoc($rcat)){
-    $q4 = sprintf ("INSERT INTO incident SELECT id+(%s*$mult),location_id+(%s*$mult),form_id,locale,user_id,%s,incident_title,incident_description,incident_date,incident_mode,incident_active,incident_verified,incident_source,incident_information,incident_rating,incident_dateadd,incident_dateadd_gmt,incident_datemodify, id FROM %s.incident WHERE id IN (SELECT incident_id FROM %s.incident AS A JOIN %s.incident_category ON incident_id = A.id WHERE category_id = %s AND incident_active)"
+    $q4 = sprintf ("INSERT INTO incident SELECT id+(%s*$mult),location_id+(%s*$mult),form_id,locale,user_id,%s,incident_title,incident_description,incident_date,incident_mode,incident_active,incident_verified,incident_source,incident_information,incident_rating,incident_dateadd,incident_dateadd_gmt,incident_datemodify, incident_alert_status, id FROM %s.incident WHERE id IN (SELECT incident_id FROM %s.incident AS A JOIN %s.incident_category ON incident_id = A.id WHERE category_id = %s AND incident_active)"
         , mysql_real_escape_string($row['id'])
         , mysql_real_escape_string($row['id'])
         , mysql_real_escape_string($row['id'])

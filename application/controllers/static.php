@@ -32,7 +32,9 @@ class Static_Controller extends Main_Controller
 	 */
 	public function view($view)
 	{
-		$this->template->header->this_page = 'help';
+		//$this->template->header->this_page = 'help';
+		$this->template->header->this_page = $view;
+
 		$this->template->content = new View('static/'.$view);
 		
 	}

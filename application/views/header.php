@@ -22,6 +22,7 @@
 
 	<?php 
 		echo html::stylesheet('media/css/style','',true);
+		echo html::stylesheet('media/css/google','',true);
 		echo html::stylesheet('media/css/jquery-ui-themeroller', '', true);
 		echo "<!--[if lte IE 7]>".html::stylesheet('media/css/iehacks','',true)."<![endif]-->";
 		echo "<!--[if IE 7]>".html::stylesheet('media/css/ie7hacks','',true)."<![endif]-->";
@@ -83,8 +84,8 @@
 	}
 	
 	//Custom stylesheet
-	echo html::stylesheet(url::base().'themes/'.$site_style."/style.css");
-	?>
+	//echo html::stylesheet(url::base().'themes/'.$site_style."/style.css");
+	//?>
 
 	<!--[if IE 6]>
 	<script type="text/javascript" src="js/ie6pngfix.js"></script>
@@ -98,89 +99,106 @@
 	</script>
 </head>
 
-<body id="page">
-	<!-- wrapper -->
-	<div class="rapidxwpr floatholder">
+<body>
+  <div id="page-container">
+    <div id="left-logo-bar">
+	<img src="/media/img/logo_01.gif">
+    </div>
+    <div id="right-page-container">
+	<div id="right-header">
+	    <table cellpadding=0 cellspacing= 0 border= 0>
+	    <tr><td width= 580 valign= top>
+	    <img src="/media/img/logo_02.gif" >
+	    </td><td valign= center align= left>
+            <span class="copy">
+		<b>need to report an issue?</b><br>
+		call <b>0512-302-6888</b> or<br>
+		text <b><i>kiirti {id} {message}</i></b> to <b>56677</b> or<br>
+		email <a href="mailto:contact@kiirti.org">contact@kiirti.org</a>
+            </span>
+	    </td></tr></table>
+        </div>
+	<div id="main-nav">
+	 <ul>
+	   <li id="home">
+	       <a href="/main">
+               <img name="main" border=0
+                <?php 
+		   if ($this_page == "home") {
+		     echo 'src="/media/img/btn_kiirtihome_down.png">'; 
+		   }
+                   else {
+                     echo 'src="/media/img/btn_kiirtihome_default.png" onmouseover = "document.main.src = \'/media/img/btn_kiirtihome_hover.png\';" onmouseout = "document.main.src = \'/media/img/btn_kiirtihome_default.png\';">';
+                   }
+                ?>
+               </a>
+	   </li>
+	   <li id="whatis">
+              <a href="/static/view/whatiskiirti">
+              <img name="whatiskiirti" border=0
+	      <?php 
+		 if ($this_page == "whatiskiirti") {
+		   echo 'src="/media/img/btn_whatiskiirti_down.png">'; 
+		 }
+		 else {
+		   echo 'src="/media/img/btn_whatiskiirti_default.png" onmouseover = "document.whatiskiirti.src = \'/media/img/btn_whatiskiirti_hover.png\';" onmouseout = "document.whatiskiirti.src = \'/media/img/btn_whatiskiirti_default.png\';">';
+		 }
+	      ?>
+              </a>
+           </li>
+	   <li id="supportedcauses">
+              <a href="/static/view/supportedcauses">
+              <img name="supportedcauses" border=0
+	      <?php 
+		 if ($this_page == "supportedcauses") {
+		   echo 'src="/media/img/btn_supportedcauses_down.png">'; 
+		 }
+		 else {
+		   echo 'src="/media/img/btn_supportedcauses_default.png" onmouseover = "document.supportedcauses.src = \'/media/img/btn_supportedcauses_hover.png\';" onmouseout = "document.supportedcauses.src = \'/media/img/btn_supportedcauses_default.png\';">';
+		 }
+	      ?>
+              </a>
+           </li>
+           <li id="getinvolved">
+              <a href="/static/view/getinvolved">
+              <img name="getinvolved" border=0
+	      <?php 
+		 if ($this_page == "getinvolved") {
+		   echo 'src="/media/img/btn_getinvolved_down.png">'; 
+		 }
+		 else {
+		   echo 'src="/media/img/btn_getinvolved_default.png" onmouseover = "document.getinvolved.src = \'/media/img/btn_getinvolved_hover.png\';" onmouseout = "document.getinvolved.src = \'/media/img/btn_getinvolved_default.png\';">';
+		 }
+	      ?>
+              </a>
+           </li>
+	   <li id="faq">
+              <a href="/static/view/faq">
+              <img name="faq" border=0
+	      <?php 
+		 if ($this_page == "faq") {
+		   echo 'src="/media/img/btn_faq_down.png">'; 
+		 }
+		 else {
+		   echo 'src="/media/img/btn_faq_default.png" onmouseover = "document.faq.src = \'/media/img/btn_faq_hover.png\';" onmouseout = "document.faq.src = \'/media/img/btn_faq_default.png\';">';
+		 }
+	      ?>
+              </a>
+           </li>
+	   <li id="aboutkiirti">
+              <a href="/static/view/aboutkiirti">
+              <img name="aboutkiirti" border=0
+	      <?php 
+		 if ($this_page == "aboutkiirti" || $this_page == "aboutkiirti-core" || $this_page == "aboutkiirti-contact") {
+		   echo 'src="/media/img/btn_aboutkiirti_down.png">'; 
+		 }
+		 else {
+		   echo 'src="/media/img/btn_aboutkiirti_default.png" onmouseover = "document.aboutkiirti.src = \'/media/img/btn_aboutkiirti_hover.png\';" onmouseout = "document.aboutkiirti.src = \'/media/img/btn_aboutkiirti_default.png\';">';
+		 }
+	      ?>
+              </a>
+           </li>
+	 </ul>
+	</div>
 
-		<!-- header -->
-		<div id="header">
 	
-			<!-- searchbox -->
-            <!--
-			<div id="searchbox">
-				<a class="share addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pub=xa-4aee423643f8276e">Share</a>
-
-				<div class="language-box">
-					<form>
-						<?php print form::dropdown('l', $locales_array, $l, ' onChange="this.form.submit()" '); ?>
-					</form>
-				</div>
-			
-				<div class="search-form">
-					<form method="get" id="search" action="<?php echo url::base() . 'search/'; ?>">
-						<ul>
-							<li><input type="text" name="k" value="" class="text" /></li>
-							<li><input type="submit" name="b" class="searchbtn" value="search" /></li>
-						</ul>
-					</form>
-				</div>
-			</div>
-            -->
-			<!-- / searchbox -->
-		
-			<!-- logo -->
-			<div id="logo">
-				<h1><?php echo $site_name; ?></h1>
-				<span><?php echo $site_tagline; ?></span>
-			</div>
-			<!-- / logo -->
-		
-			<!-- submit incident -->
-            <!--
-			<div class="submit-incident clearingfix">
-				<a href="<?php echo url::base() . "reports/submit" ?>"><?php echo Kohana::lang('ui_main.submit'); ?></a>
-			</div>
-            -->
-			<!-- / submit incident -->
-		</div>
-		<!-- / header -->
-
-		<!-- main body -->
-		<div id="middle">
-			<div class="background layoutleft">
-		
-				<!-- mainmenu -->
-			<!--	<div id="mainmenu" class="clearingfix">
-					<ul>
-						<li><a href="<?php echo url::base() . "main" ?>" <?php if ($this_page == 'home') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.home'); ?></a></li>
-						<li><a href="<?php echo url::base() . "reports" ?>" <?php if ($this_page == 'reports') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.reports'); ?></a></li>
-						<li><a href="<?php echo url::base() . "reports/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit'); ?></a></li>
-						<li><a href="<?php echo url::base() . "alerts" ?>" <?php if ($this_page == 'alerts') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.alerts'); ?></a></li>
-						<?php
-						// Contact Page
-						if ($site_contact_page)
-						{
-							?>
-							<li><a href="<?php echo url::base() . "contact" ?>" <?php if ($this_page == 'contact') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.contact'); ?></a></li>
-							<?php
-						}
-						
-						// Help Page
-						if ($site_help_page)
-						{
-							?>
-							<li><a href="<?php echo url::base() . "help" ?>" <?php if ($this_page == 'help') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.help'); ?></a></li>
-							<?php
-						}
-						
-						// Custom Pages
-						foreach ($pages as $page)
-						{
-							$this_active = ($this_page == 'page_'.$page->id) ? 'class="active"' : '';
-							echo "<li><a href=\"".url::base()."page/index/".$page->id."\" ".$this_active.">".$page->page_tab."</a></li>";
-						}
-						?>
-					</ul>
-
-				</div> -->
-				<!-- / mainmenu -->
