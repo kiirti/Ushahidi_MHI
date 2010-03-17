@@ -17,7 +17,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-	<title>Kiirti - <?php echo $site_name; ?></title>
+	<title><?php echo $site_name; ?> (powered by Kiirti)</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<?php 
@@ -106,6 +106,7 @@
 	$dot = strpos($baseurl,'.');
 	$slash = strpos($baseurl, '/', 7);
 	$mainurl = "http://".substr($baseurl,$dot+1, $slash-$dot-1);
+	$subdomain = substr($baseurl, 7, $dot-7);
 ?>
 <div id="page-container">
   <div id="left-logo-bar">
@@ -113,12 +114,20 @@
   </div>
   <div id="right-page-container">
       <div id="right-header">
-	    <table cellpadding=0 cellspacing= 0 border= 0>
-	    <tr><td width= 580 valign= top>
-	    <img src="/media/img/logo_02.gif" >
-	    </td><td valign= center align= left>
+	    <table cellpadding= 5 cellspacing= 0 border= 0>
+	    <tr><td valign= top>
+	    <a href="<?php echo $mainurl.'/main';?>">
+	    <img src="/media/img/logo_02.gif" border=0></a>
+	    </td><td valign= center>
+	      <table border= 0>
+	      <tr><td>
+	      <span class="copy"><font size=+1>IN PARTNERSHIP WITH</font></span></td></tr>
+	      <tr><td>
+	      <img width= 250 src="<?php echo '/media/img/'.$subdomain.'_logo.gif';?>">
+	      </table>
+	    </td><td valign= center align= right>
             <span class="copy">
-		<b>need to report an issue?</b><br>
+		<font size=+1>TO REPORT AN ISSUE</font><br>
 		call <b>0512-302-6888</b> or<br>
 		text <b><i>kiirti {id} {message}</i></b> to <b>56677</b> or<br>
 		email <a href="mailto:contact@kiirti.org">contact@kiirti.org</a>
@@ -126,7 +135,10 @@
 	    </td></tr></table>
       </div>
       <div id="main-nav">
-       <ul>
+	<div style="padding-top:18px; padding-left:20px;"
+     		<span class="title-subsite"><?php echo $site_name;?></span><br>
+	</div>
+      <!--<ul>
 	 <li id="home">
 	     <a href="<?php echo $mainurl.'/main';?>">
 	     <img name="main" border=0
@@ -163,12 +175,11 @@
 		 src="/media/img/btn_aboutkiirti_default.png" onmouseover = "document.aboutkiirti.src = '/media/img/btn_aboutkiirti_hover.png';" onmouseout = "document.aboutkiirti.src = '/media/img/btn_aboutkiirti_default.png';">
 	    </a>
 	 </li>
-       </ul>
+       </ul>-->
      </div>
 <div class="middle-content-container">
      <div id="sub-site-header">
-	<div style="padding-top:10px; padding-left:10px;"
-     		<span class="title-subsite"><?php echo $site_name;?></span><br>
+	<div style="padding-top:8px; padding-left:10px;"
      		<span class="subtitle-subsite"><?php echo $site_tagline;?></span>	
 	</div>
 	   <div id="subnav">
