@@ -119,12 +119,7 @@
 	    <a href="<?php echo $mainurl.'/main';?>">
 	    <img src="/media/img/logo_02.gif" border=0></a>
 	    </td><td valign= center>
-	      <table border= 0>
-	      <tr><td>
-	      <span class="copy"><font size=+1>IN PARTNERSHIP WITH</font></span></td></tr>
-	      <tr><td>
-	      <img width= 250 src="<?php echo '/media/img/'.$subdomain.'_logo.gif';?>">
-	      </table>
+	    <img style="width:width=250px; height=120px;" src="<?php echo '/media/img/'.$subdomain.'_logo.gif';?>">
 	    </td><td valign= center align= right>
             <span class="copy">
 		<font size=+1>TO REPORT AN ISSUE</font><br>
