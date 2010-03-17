@@ -28,6 +28,7 @@ At Kiirti, we believe that better and equal societies are based on strong democr
    <div id="right-rail">
 	<p class="sub-nav-link sub-nav-link-on">Philosophy</p>
 	<p class="sub-nav-link"><a href='/static/view/aboutkiirti-core'>Core Team</a></p>
+	<p class="sub-nav-link"><a href='/static/view/aboutkiirti-advisors'>Advisors</a></p>
 	<p class="sub-nav-link"><a href='/static/view/aboutkiirti-partners'>Partners</a></p>
 	<p class="sub-nav-link"><a href='/static/view/aboutkiirti-contact'>Contact Kiirti</a></p>
    </div>

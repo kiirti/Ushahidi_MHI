@@ -53,6 +53,7 @@ The vision for <b>National Network for India</b> is a vibrant India where the be
     <div id="right-rail">
 	 <p class="sub-nav-link"><a href='/static/view/aboutkiirti'>Philosophy</a></p>
 	 <p class="sub-nav-link"><a href='/static/view/aboutkiirti-core'>Core Team</a></p>
+	 <p class="sub-nav-link"><a href='/static/view/aboutkiirti-advisors'>Advisors</a></p>
 	 <p class="sub-nav-link sub-nav-link-on">Partners</p>
 	 <p class="sub-nav-link"><a href='/static/view/aboutkiirti-contact'>Contact Kiirti</a></p>
     </div>

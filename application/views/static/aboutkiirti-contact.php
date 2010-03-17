@@ -24,6 +24,7 @@
 	<div id="right-rail">
 	     <p class="sub-nav-link"><a href='/static/view/aboutkiirti'>Philosophy</a></p>
 	     <p class="sub-nav-link"><a href='/static/view/aboutkiirti-core'>Core Team</a></p>
+	     <p class="sub-nav-link"><a href='/static/view/aboutkiirti-advisors'>Advisors</a></p>
 	     <p class="sub-nav-link"><a href='/static/view/aboutkiirti-partners'>Partners</a></p>
 	     <p class="sub-nav-link sub-nav-link-on">Contact Kiirti</p>
 	</div>

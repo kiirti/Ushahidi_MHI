@@ -34,6 +34,7 @@ Kiirti is an initiative by <a href="http://www.emoksha.org">eMoksha</a> to promo
 	<div id="right-rail">
 	     <p class="sub-nav-link"><a href='/static/view/aboutkiirti'>Philosophy</a></p>
 	     <p class="sub-nav-link sub-nav-link-on">Core Team</p>
+	     <p class="sub-nav-link"><a href='/static/view/aboutkiirti-advisors'>Advisors</a></p>
 	     <p class="sub-nav-link"><a href='/static/view/aboutkiirti-partners'>Partners</a></p>
 	     <p class="sub-nav-link"><a href='/static/view/aboutkiirti-contact'>Contact Kiirti</a></p>
 	</div>
