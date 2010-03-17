@@ -23,7 +23,7 @@
 	<img src="/media/img/home-kiirti.jpg" width=400 height=300>
 	</div>
 	<div class="page-banner-right-text">
-	<span class="title"><b>Kiirti, in Sanskrit, means report or reputation.</b><br><br>It is a platform to enable effective governance by promoting awareness and citizen engagement. It allows government, non-government and civic organizations to engage with citizens easily through phone, sms, email, and the web.</span>
+	<span class="title"><b>Kiirti, in Sanskrit, means report or reputation.</b><br><br>It is a platform to enable effective governance by promoting awareness and citizen engagement. It allows government, non-government and civic organizations to engage with citizens easily through phone, sms, email, and the web. </span>
 	</div>
 	<img src='/media/img/divider.gif'>
    </div>
@@ -57,7 +57,7 @@
 		$sharing_site_name = $share_info[0];
 		$sharing_color = $share_info[1];
 		$sharing_domain = $share_info[2];
-		echo '<a href="http://' . $sharing_domain . Kohana::config('settings.hosting_domain').'" target="_self"><div class="swatch" style="background-color:#'.$sharing_color.'"></div><div style="margin-left:10px;">'.$sharing_site_name.'</div></a><br />';
+		echo '<a href="http://' . $sharing_domain . Kohana::config('settings.hosting_domain').'" target="_self"><div class="swatch" style="background-color:#'.$sharing_color.'"></div><div style="margin-left:20px;"><font size=+1>'.$sharing_site_name.'</font></div></a><br />';
 	    }
 	?>
 	<!--<a href="#"><img src= dot_safety.gif border= 0>Safety Tracker<br></a>
