@@ -119,13 +119,13 @@
 	    <a href="<?php echo $mainurl.'/main';?>">
 	    <img src="/media/img/logo_02.gif" border=0></a>
 	    </td><td valign= center>
-	    <img style="width:width=250px; height=120px;" src="<?php echo '/media/img/'.$subdomain.'_logo.gif';?>">
+	    <img src="<?php echo '/media/img/'.$subdomain.'_logo.gif';?>">
 	    </td><td valign= center align= right>
             <span class="copy">
-		<font size=+1>TO REPORT AN ISSUE</font><br>
-		call <b>0512-302-6888</b> or<br>
-		text <b><i>kiirti {id} {message}</i></b> to <b>56677</b> or<br>
-		email <a href="mailto:contact@kiirti.org">contact@kiirti.org</a>
+		<u>TO REPORT AN ISSUE</u><br>
+		call: <b>0512-302-6888</b><br>
+		text: <b>kiirti {id} {message}</b> to <b>56677</b><br>
+		email: <a href="mailto:contact@kiirti.org">contact@kiirti.org</a>
             </span>
 	    </td></tr></table>
       </div>
