@@ -18,19 +18,39 @@
 	<img src='/media/img/divider.gif'>
    </div>
    <div id="left-content">
-		<span class="title"><a href="#">FixOurCity Delhi</a></span><br>
+		<span class="title"><a href="http://fixourcitydelhi.kiirti.org">FixOurCity Delhi</a></span><br>
 		<span class="copy">
 		To report, view and discuss civic issues in Delhi. This supported cause is managed in partnership with National Network For Indians.
 		</span><br>
 	<img src='/media/img/line580.gif'><br>
-			<span class="title"><a href="#">FixOurCity Hyderabad</a></span><br>
+			<span class="title"><a href="http://chirag.kiirti.org">CHIRAG</a></span><br>
+		<span class="copy">
+Founded in 1987, the organization works with rural health committees to improve ground level implementation of the Nation Rural Health Mission. They will be using Kiirti to assess knowledge gaps in preventive health.  
+		</span><br>
+	<img src='/media/img/line580.gif'><br>
+			<span class="title"><a href="http://fixourcityhyderabad.kiirti.org">FixOurCity Hyderabad</a></span><br>
 		<span class="copy">
 To report, view and discuss civic issues in Hyderabad. This supported cause is managed in partnership with LokSatta and other local NGOs.
 		</span><br>
 	<img src='/media/img/line580.gif'><br>
-			<span class="title"><a href="#">FixOurCity Mumbai</a></span><br>
+			<span class="title"><a href="http://esg.kiirti.org">Environment Support Group</a></span><br>
 		<span class="copy">
-To report, view and discuss civic issues in Mumbai. This supported cause is managed in partnership with Harvard Humanitarian Initiative and MCGM.
+Founded in 1998, this trust involves in research, training, campaign support, and advocacy on a variety of environmental and social justice issues. They will use Kiirti to solicit public opinions and gather information on related issues. 
+		</span><br>
+	<img src='/media/img/line580.gif'><br>
+			<span class="title"><a href="http://tiigs.kiirti.org">The Indian Institute of Geographical Studies (TIIGS)</a></span><br>
+		<span class="copy">
+The institute involves teachers, students and parents to take geographical education to the next level by including field work as part of the learning. They will use Kiirti, to gather information on student projects and make geography relevant, applicable, exciting, and fun.
+		</span><br>
+	<img src='/media/img/line580.gif'><br>
+			<span class="title"><a href="http://kucc.kiirti.org">Koramangala United Citizens Council (KUCC)</a></span><br>
+		<span class="copy">
+A federation of RWA’s will involve their member citizens to work with ULB’s for the welfare of the people in the Ward 151. They will use Kiirti to enable better governance, transparency, gather reports, view and discuss them. 
+		</span><br>
+	<img src='/media/img/line580.gif'><br>
+			<span class="title"><a href="http://fixourcitybangaore.kiirti.org">FixOurCity Bangalore</a></span><br>
+		<span class="copy">
+To report, view and discuss civic issues in Bangalore. This supported cause is managed in partnership with local RWAs.
 		</span><br>
      </div>
      <div id="right-rail">
