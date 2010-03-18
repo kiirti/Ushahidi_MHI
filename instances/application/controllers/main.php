@@ -59,9 +59,15 @@ class Main_Controller extends Template_Controller {
 		$this->template->header->site_tagline = Kohana::config('settings.site_tagline');
         $this->template->header->api_url = Kohana::config('settings.api_url');
 
+		// Get email for TO REPORT AN ISSUE
+		$this->template->header->report_email = Kohana::config('settings.site_email');
+
 		// Display Contact Tab?
 		$this->template->header->site_contact_page = Kohana::config('settings.site_contact_page');
 				
+		// Get custom SMS ID for TO REPORT AN ISSUE (short-term fix; need to create a new field later)
+		$this->template->header->sms_id = Kohana::config('settings.sms_no1');
+
 		// Display Help Tab?
 		$this->template->header->site_help_page = Kohana::config('settings.site_help_page');
 		
