@@ -27,6 +27,11 @@ Kiirti is an initiative by <a href="http://www.emoksha.org">eMoksha</a> to promo
 		</span>
 
 		<img src='/media/img/line580.gif'>
+<img style="float:left; margin-right:5px;" src='/media/img/sudha.png'>
+<span class="copy"><b>Sudha Nair</b> is eMoksha's first full-time employee in Bangalore. In her role as the Project/Community Manager for Kiirti, she has successfully built (and continuing to build) partnerships with government, non-government and civic society organizations in India. Sudha is incredibly passionate about civic issues and is an invaluable member of our team. In her past life, she worked in the textile industry and later as a technical writer.
+		</span>
+
+		<img src='/media/img/line580.gif'>
 <img style="float:left; margin-right:5px;" src='/media/img/balaji.gif'>
 <span class="copy"><b>Balaji Krishnaprasad</b> is a volunteer developer for eMoksha, currently working on SMS support for Kiirti. He is a senior .NET consultant working in Chicago. Balaji holds an MS in Computer Science from University of Florida and BS in Computer Science from University of Madras.
 		</span>

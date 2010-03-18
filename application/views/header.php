@@ -109,12 +109,12 @@
 	    <table cellpadding=0 cellspacing= 0 border= 0>
 	    <tr><td width= 580 valign= top>
 	    <img src="/media/img/logo_02.gif" >
-	    </td><td valign= center align= left>
+	    </td><td valign= center align= right>
             <span class="copy">
-		<b>need to report an issue?</b><br>
-		call <b>0512-302-6888</b> or<br>
-		text <b><i>kiirti {id} {message}</i></b> to <b>56677</b> or<br>
-		email <a href="mailto:contact@kiirti.org">contact@kiirti.org</a>
+		<u>TO REPORT AN ISSUE</u><br>
+		call: <b>0512-302-6888</b><br>
+		text: <b>kiirti {id} {message}</b> to <b>56677</b><br>
+		email: <a href="mailto:contact@kiirti.org">contact@kiirti.org</a>
             </span>
 	    </td></tr></table>
         </div>
