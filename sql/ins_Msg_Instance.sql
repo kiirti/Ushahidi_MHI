@@ -41,7 +41,7 @@ REPEAT
 	SET @message_type = v_message_type;
 	SET @message_date = v_message_date;
 	SET @message_level = v_message_level;
-	SET @instanceID = (select SUBSTRING(SUBSTRING_INDEX(v_message,' ',2),8));
+	SET @instanceID = (select SUBSTRING_INDEX(SUBSTRING_INDEX(v_message,' ',2),' ',-1));
 	SET @instanceName = (select dbdatabase from sites where InstanceSMS_ID = @instanceID);
 	SET @instanceName = (Select concat(@instanceName, '.message'));
 	if @instanceName IS NULL then

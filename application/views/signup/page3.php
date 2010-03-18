@@ -8,7 +8,7 @@
 <div class="simple-content">
    <br><span class="formcopy-title">Thank you for submitting your request.</span><br><br>
    <span class="copy">We have successfully received it and will review it as soon as possible.</span><br><br>
-   <span class="copy">Within the next 2-3 days you will receive an email, at the specified address, confirming approval of your request (or asking for additional information). In the interim, if you have any questions, please contact us at <a href="#">requests@kiirti.org</a>.</span><br>
+   <span class="copy">Within the next 2-3 days you will receive an email, at the specified address, confirming approval of your request (or asking for additional information). In the interim, if you have any questions, please <a href="mailto:contact@kiirti.org">contact us</a>.</span><br>
 </div>
 </div>
 
