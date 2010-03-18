@@ -113,7 +113,7 @@
             <span class="copy">
 		<u>TO REPORT AN ISSUE</u><br>
 		call: <b>0512-302-6888</b><br>
-		text: <b>kiirti {id} {message}</b> to <b>56677</b><br>
+		text: <b>kiirti {message}</b> to <b>56677</b><br>
 		email: <a href="mailto:contact@kiirti.org">contact@kiirti.org</a>
             </span>
 	    </td></tr></table>
