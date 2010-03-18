@@ -959,7 +959,8 @@ CREATE TABLE `sites` (
    dbport         varbinary(255) NOT NULL DEFAULT '',
    dbsocket       int NOT NULL DEFAULT 3306,
    dbdatabase     varbinary(255) NOT NULL,
-   added_on       timestamp DEFAULT CURRENT_TIMESTAMP
+   added_on       timestamp DEFAULT CURRENT_TIMESTAMP,
+   InstanceSMS_ID varchar(20) default NULL
 ) ENGINE=InnoDB DEFAULT CHARSET='binary';
 
 --
