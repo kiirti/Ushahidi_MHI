@@ -18,6 +18,11 @@
 	<img src='/media/img/divider.gif'>
    </div>
    <div id="left-content">
+		<span class="title"><a href="http://janaagraha.kiirti.org">Janaagraha</a></span><br>
+		<span class="copy">
+Janaagraha is a not-for-profit organization that aims to strengthen democracy in India by working for citizen participation in urban local governance. They will use Kiirti in the 2010 BBMP elections to gather reports from Area Voter Mitras (AVM). They will also use Kiirti to solicit public opinions on civic issues.
+		</span><br>
+	<img src='/media/img/line580.gif'><br>
 		<span class="title"><a href="http://fixourcitydelhi.kiirti.org">FixOurCity Delhi</a></span><br>
 		<span class="copy">
 		To report, view and discuss civic issues in Delhi. This supported cause is managed in partnership with National Network For Indians.
@@ -46,11 +51,6 @@ The institute involves teachers, students and parents to take geographical educa
 			<span class="title"><a href="http://kucc.kiirti.org">Koramangala United Citizens Council (KUCC)</a></span><br>
 		<span class="copy">
 A federation of RWA’s will involve their member citizens to work with ULB’s for the welfare of the people in the Ward 151. They will use Kiirti to enable better governance, transparency, gather reports, view and discuss them. 
-		</span><br>
-	<img src='/media/img/line580.gif'><br>
-			<span class="title"><a href="http://fixourcitybangaore.kiirti.org">FixOurCity Bangalore</a></span><br>
-		<span class="copy">
-To report, view and discuss civic issues in Bangalore. This supported cause is managed in partnership with local RWAs.
 		</span><br>
      </div>
      <div id="right-rail">

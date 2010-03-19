@@ -20,12 +20,17 @@ Kiirti is an initiative by <a href="http://www.emoksha.org">eMoksha</a> to promo
    </div>
    <div id="left-content">
 	<span class="title">Partners</span><br><br>
-	<a href=http://www.nnfi.org.in/><img border=0 style="float:left; margin-right:5px; width:150px; height:100px;" src='/media/img/EXTERN_0000.png'></a>
+	<a href="http://www.janaagraha.org"><img border=0 style="float:left; margin-right:5px; width:200px; height:50px;" src='/media/img/janaagraha.png'></a>
+        <span class="copy">
+Janaagraha is a not-for-profit institution started in December 2001 by Ramesh and Swati Ramanathan. From a movement to include people's participation in public governance, it has since evolved into a robust institution for Citizenship and Democracy. It has an eminent governing board and an active Working Council that makes operational decisions for the organisation. 
+	</span>
+	<img src='/media/img/line580.gif'>
+	<a href="http://www.nnfi.org.in"><img border=0 style="float:left; margin-right:5px; width:150px; height:100px;" src='/media/img/EXTERN_0000.png'></a>
         <span class="copy">
 The vision for <b>National Network for India</b> is a vibrant India where the benefits of progress are enjoyed by all citizens, not just a priveleged few.
 	</span>
 	<img src='/media/img/line580.gif'>
-	<img style="float:left; margin-right:5px; width:100px; height:100px;" src='/media/img/EXTERN_0001.jpg'>
+	<a href="http://www.esgindia.org"><img border=0 style="float:left; margin-right:5px; width:100px; height:100px;" src='/media/img/EXTERN_0001.jpg'></a>
 	<span class="copy">
 	<b>Environment Support Group</b> (ESG) is an independent not-for-profit non-governmental organisation, founded in 1996 and registered as a Public Charitable Trust in 1998. Its main functions involve research, training, campaign support, and advocacy on a variety of environmental and social justice issues.
 	</span>
@@ -45,7 +50,7 @@ The vision for <b>National Network for India</b> is a vibrant India where the be
   <b>Chirag</b> is a rural development organisation based in the Kumaun region of Uttarakhand in India. Since 1987 we have sought to improve the quality of life of families – with a special emphasis on women, children and the poor – residing in villages of the Central Himalayan region. We recognise the need for an integrated approach to development and consequently our activities are diverse.
 	</span>
 	<img src='/media/img/line580.gif'>
-	<img style="float:left; margin-right:5px; height:80px; width:100px; width:100px; height:75px;" src='/media/img/EXTERN_0005.jpg'></a>
+	<a href="http://www.loksatta.org"><img border=0 style="float:left; margin-right:5px; height:80px; width:100px; width:100px; height:75px;" src='/media/img/EXTERN_0005.jpg'></a>
 	<span class="copy">
 	<b>Lok Satta</b> is dedicated to creating a suitable environment for all Indians to realize their maximum positive potential through comprehensive reforms in the Indian governance.
 	</span><br><br><br>
