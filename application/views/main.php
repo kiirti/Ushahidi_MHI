@@ -50,23 +50,26 @@
   <div id="right-content">
 	<span class="header">Supported Causes</span><br><br>
 	<div id="legend">
-	<span class="list"><br>
-	<?php
-	    foreach ($shares as $share => $share_info)
-	    {
-		$sharing_site_name = $share_info[0];
-		$sharing_color = $share_info[1];
-		$sharing_domain = $share_info[2];
-		echo '<a href="http://' . $sharing_domain . Kohana::config('settings.hosting_domain').'" target="_self"><div class="swatch" style="background-color:#'.$sharing_color.'"></div><div style="margin-left:20px;"><font size=+1>'.$sharing_site_name.'</font></div></a><br />';
-	    }
-	?>
-	<!--<a href="#"><img src= dot_safety.gif border= 0>Safety Tracker<br></a>
-	<a href="#"><img src= dot_karnataka.gif border= 0>Karnataka Flood Relief<br></a>
-	<a href="#"><img src= dot_corruption.gif border= 0>Corruption Tracker<br></a>
-	<a href="#"><img src= dot_mumbai.gif border= 0>Mumbai Flood Tracker<br></a>
-	<a href="#"><img src= dot_delhi.gif border= 0>FixOurCity Delhi<br></a>
-	<a href="#"><img src= dot_hyderabad.gif border= 0>FixOurCity Hyderabad<br></a>-->
-	</span>
+	<!--<span class="list">-->
+	<br>
+	<ul style="list-style-type:disc; list-style-position:inside;color: red;">
+	<?php foreach ($shares as $share => $share_info):?>
+		<?php 
+			$sharing_site_name = $share_info[0];
+			$sharing_color = $share_info[1];
+			$sharing_domain = $share_info[2];
+			$sharing_url = 'http://' . $sharing_domain . Kohana::config('settings.hosting_domain');
+		?>
+		<!--<li style="color: <?php echo "#".$sharing_color;?>;"><div style="margin-left:20px;">testing</div></li>-->
+		<li><div style="margin-left:20px;">testing</div></li>
+		<!--<a href="<?php echo $sharing_url;?>" target="_self">
+		<div style="margin-left:20px;"><font size=+1><?php echo $sharing_site_name;?></font></div>
+		</a>
+		</li>-->
+		<!--<div class="swatch" style="background-color:#'.$sharing_color.'"></div>-->
+	<?php endforeach;?>
+	</ul>
+	<!--</span>-->
         </div> 
    </div>
 
