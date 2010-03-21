@@ -6,10 +6,10 @@
 
 $config = array
 (
-	'site_name' => 'Ushahidi MHI',
-    'base_subdomain' => 'development',
-    'base_replace' => '.development',
-    'hosting_domain' => '.development.kiirti.org',
+    'site_name' => 'Ushahidi MHI',
+    'base_subdomain' => 'www',
+    'base_replace' => '',
+    'hosting_domain' => '.kiirti.org',
     'deployments' => '/root/kiirti/multiple/deployments',
     'instance_dbhost' => 'localhost',
     'create_db' => '/scripts/create_instance.sh',

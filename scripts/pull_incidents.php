@@ -1,9 +1,9 @@
 <?php
 
 $mhi_db = array(
-  'user'     => 'root',
+  'user'     => 'emoksha',
   'password' => 'em0ksh2',
-  'host'     => 'localhost',
+  'host'     => 'kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com',
   'port'     => '3306',
   'database' => 'mhidb'
 );
