@@ -19,7 +19,9 @@ dbuser="emoksha"
 dbpass="em0ksh2"
 dbhost="kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com"
 dbscript="/root/kiirti/multiple/mog/Ushahidi_MHI/instances/sql/ushahidi.sql"
-site_host="kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com"
+
+## This needs to be the name of the instance kiirti runs on
+site_host="domU-12-31-38-01-BC-B1.compute-1.internal"
 
 if [ "$name" == "" ]; then
 echo "usage: create_instance.sh user pass dbname"
