@@ -46,6 +46,7 @@ while (my $hit = $hits->next) {
     
     # Should we automatically approve this hit?
     $mturk->ApproveAssignment( AssignmentId => $assignmentId );
+    #$mturk->RejectAssignment( AssignmentId => $assignmentId );
   }
   #print "$hitId\n";
   #$mturk->DisposeHIT(HITId => $hitId);
