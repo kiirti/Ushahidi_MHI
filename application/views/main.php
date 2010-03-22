@@ -57,15 +57,9 @@
 		$sharing_site_name = $share_info[0];
 		$sharing_color = $share_info[1];
 		$sharing_domain = $share_info[2];
-		echo '<a href="http://' . $sharing_domain . Kohana::config('settings.hosting_domain').'" target="_self"><div class="swatch" style="background-color:#'.$sharing_color.'"></div><div style="margin-left:20px;"><font size=+1>'.$sharing_site_name.'</font></div></a><br />';
+		echo '<a href="http://' . $sharing_domain . Kohana::config('settings.hosting_domain').'" target="_self"><div class="swatch" style="background-color:#'.$sharing_color.'"></div><div style="margin-left:20px;"><font size=3>'.$sharing_site_name.'</font></div></a><br />';
 	    }
 	?>
-	<!--<a href="#"><img src= dot_safety.gif border= 0>Safety Tracker<br></a>
-	<a href="#"><img src= dot_karnataka.gif border= 0>Karnataka Flood Relief<br></a>
-	<a href="#"><img src= dot_corruption.gif border= 0>Corruption Tracker<br></a>
-	<a href="#"><img src= dot_mumbai.gif border= 0>Mumbai Flood Tracker<br></a>
-	<a href="#"><img src= dot_delhi.gif border= 0>FixOurCity Delhi<br></a>
-	<a href="#"><img src= dot_hyderabad.gif border= 0>FixOurCity Hyderabad<br></a>-->
 	</span>
         </div> 
    </div>
@@ -75,29 +69,3 @@
 
 </div>
 
-		<!--<table cellpadding= 0 cellspacing= 0 border = 0 width= 780>
-		<tr><td height= 25 valign= top>
-		<span class="header">Recent Reports</span>
-		</td><td valign= top>
-		<span class="header">Supported Causes</span>
-		</td></tr>
-		<tr><td width= 580 height= 350 valign= top>
-		<iframe width="580" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?key=ABQIAAAAcl7QUIumcR5T6p9ImT6bKhR2OQT1YP0vDj2NRfW8LH958JXsihQ8stnGFHHFN4kZwhUfXzd7QcO97w&amp;mapclient=jsapi&amp;ie=UTF8&amp;ll=20.632784,78.925781&amp;spn=28.531064,50.976563&amp;z=4&amp;output=embed"></iframe><br />
-		</td><td width= 200 bgcolor='#ececec' valign= top><img src='media/img/box.gif'><br>
-		<span class="list">
-		<?php
-		    foreach ($shares as $share => $share_info)
-		    {
-			$sharing_site_name = $share_info[0];
-			$sharing_color = $share_info[1];
-			$sharing_domain = $share_info[2];
-			echo '<a href="http://' . $sharing_domain . Kohana::config('settings.hosting_domain').'" target="new"><div class="swatch" style="background-color:#'.$sharing_color.'"></div><div>'.$sharing_site_name.'</div></a><br />';
-		    }
-		?>
-		<a href="#"><img src= dot_safety.gif border= 0>Safety Tracker<br></a>
-		<a href="#"><img src= dot_karnataka.gif border= 0>Karnataka Flood Relief<br></a>
-		<a href="#"><img src= dot_corruption.gif border= 0>Corruption Tracker<br></a>
-		<a href="#"><img src= dot_mumbai.gif border= 0>Mumbai Flood Tracker<br></a>
-		<a href="#"><img src= dot_delhi.gif border= 0>FixOurCity Delhi<br></a>
-		<a href="#"><img src= dot_hyderabad.gif border= 0>FixOurCity Hyderabad<br></a>
-		</td></tr></table>-->
