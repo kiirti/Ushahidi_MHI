@@ -18,6 +18,11 @@
 	<img src='/media/img/divider.gif'>
    </div>
    <div id="left-content">
+		<span class="title"><a href="http://5thpillar.kiirti.org">5th Pillar</a></span><br>
+		<span class="copy">
+5th Pillar is an organization that strongly believes that the people that make up a democracy are the strongest members of such a system. Without the people a democracy would not exist. As such, we believe that if each one of us changes our own habits, we will be attacking corruption at its roots, and corruption will cease to exist. 
+		</span><br>
+	<img src='/media/img/line580.gif'><br>
 		<span class="title"><a href="http://janaagraha.kiirti.org">Janaagraha</a></span><br>
 		<span class="copy">
 Janaagraha is a not-for-profit organization that aims to strengthen democracy in India by working for citizen participation in urban local governance. They will use Kiirti in the 2010 BBMP elections to gather reports from Area Voter Mitras (AVM). They will also use Kiirti to solicit public opinions on civic issues.

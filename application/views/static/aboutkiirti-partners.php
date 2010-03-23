@@ -20,6 +20,11 @@ Kiirti is an initiative by <a href="http://www.emoksha.org">eMoksha</a> to promo
    </div>
    <div id="left-content">
 	<span class="title">Partners</span><br><br>
+	<a href="http://www.5thpillar.org"><img border=0 style="float:left; margin-right:5px; width:200px; height:50px;" src='/media/img/5thpillar.gif'></a>
+        <span class="copy">
+5th Pillar is an organization that strongly believes that the people that make up a democracy are the strongest members of such a system. Without the people a democracy would not exist. As such, we believe that if each one of us changes our own habits, we will be attacking corruption at its roots, and corruption will cease to exist. 
+	</span>
+	<img src='/media/img/line580.gif'>
 	<a href="http://www.janaagraha.org"><img border=0 style="float:left; margin-right:5px; width:200px; height:50px;" src='/media/img/janaagraha.png'></a>
         <span class="copy">
 Janaagraha is a not-for-profit institution started in December 2001 by Ramesh and Swati Ramanathan. From a movement to include people's participation in public governance, it has since evolved into a robust institution for Citizenship and Democracy. It has an eminent governing board and an active Working Council that makes operational decisions for the organisation. 
