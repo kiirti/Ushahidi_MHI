@@ -18,7 +18,7 @@ Kiirti is an initiative by <a href="http://www.emoksha.org">eMoksha</a> to promo
 	<span class="title">Core Team</span><br><br>
 	<img style="float:left; margin-right:5px;" src='/media/img/selvam.jpg'>
 		<span class="copy">
-<b>Selvam Velmurugan</b> is the founder of eMoksha. He is an internet technologist with around 12 years of experience in building and managing distributed web-scale systems. During his 10-year stint at Amazon, he devised complex search algorithms, setup the Chennai Development Center, and managed critical platform components for AWS. In the past, he has been part of several non-profit initiatives, notably being a core member of the Tsunami Relief team at Amazon collecting over $15 million in relief funds. Selvam holds an MS in CS from University of Georgia and BS in CS from College of Engineering, Guindy. He also holds a Diploma in Film-making from University of Washington.
+<b>Selvam Velmurugan</b> is the founder of eMoksha. He is an internet technologist with around 12 years of experience in building and managing distributed web-scale systems. He has worked on complex search algorithms, helped setup Amazon's Chennai Development Center, and managed critical platform components for AWS. He has also been part of several non-profit initiatives, notably being a core member of the Tsunami Relief team at Amazon collecting over $15 million in relief funds. Selvam holds an MS in CS from University of Georgia and BS in CS from College of Engineering, Guindy. He also holds a Diploma in Film-making from University of Washington.
 		</span>
 		
 		<img src='/media/img/line580.gif'>
@@ -29,6 +29,11 @@ Kiirti is an initiative by <a href="http://www.emoksha.org">eMoksha</a> to promo
 		<img src='/media/img/line580.gif'>
 <img style="float:left; margin-right:5px;" src='/media/img/sudha.png'>
 <span class="copy"><b>Sudha Nair</b> is eMoksha's first full-time employee in Bangalore. In her role as the Project/Community Manager for Kiirti, she has successfully built (and continuing to build) partnerships with government, non-government and civic society organizations in India. Sudha is incredibly passionate about civic issues and is an invaluable member of our team. In her past life, she worked in the textile industry and later as a technical writer.
+		</span>
+
+		<img src='/media/img/line580.gif'>
+<img style="float:left; margin-right:5px;" src='/media/img/astha.png'>
+<span class="copy"><b>Astha Gupta</b> is a volunteer developer for eMoksha, currently working on site design and development support for Kiirti. She is currently a Program Manager at Microsoft and has also worked as a software engineer elsewhere for many years. She is passionate about large scale distributed systems as well as the innovative use of technology for solving some of the basic problems that still plague our society. She holds a Bachelors in Applied Science from the University of Waterloo.  
 		</span>
 
 		<img src='/media/img/line580.gif'>
