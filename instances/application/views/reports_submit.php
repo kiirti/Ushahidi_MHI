@@ -220,7 +220,7 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 
 			<!-- Video Fields -->
 			<div id="divVideo" class="report_row">
-				<h4><?php echo Kohana::lang('ui_main.reports_video'); ?></h4>
+				<h4><?php echo Kohana::lang('ui_main.reports_video'); ?><br /><span class="example">Supported sites: Youtube, Google, Revver, Metacafe, Liveleak and Dotsub</span></h4>
 				<?php
 					$this_div = "divVideo";
 					$this_field = "incident_video";

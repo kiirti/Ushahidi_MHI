@@ -329,7 +329,7 @@
 
 							<!-- Video Fields -->
 							<div class="row link-row">
-								<h4>Video Link</h4>
+								<h4>Video Link<br /><span class="example">Supported sites: Youtube, Google, Revver, Metacafe, Liveleak and Dotsub</span></h4>
 							</div>
 							<div id="divVideo">
 								<?php
