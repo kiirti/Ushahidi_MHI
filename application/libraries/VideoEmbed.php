@@ -34,7 +34,7 @@ class VideoEmbed{
       if($host != "youtube" && $host != "google" && $host != "revver" && $host != "metacafe" && $host != "liveleak" && $host != "dotsub")
       {
          $error = true;
-         echo "Error Embedding<br/>";
+         echo "No video uploaded<br/>";
       }
       
       if($host == "youtube")
