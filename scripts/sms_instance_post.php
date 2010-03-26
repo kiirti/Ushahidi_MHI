@@ -34,7 +34,7 @@ while($row = mysql_fetch_assoc($result)){
   $rcat1 = mysql_query($q2);
   $rcat = mysql_fetch_row($rcat1);
   print "Instance SMS ID: ". $rcat[0]."\n";
-  $qS = sprintf ("select subdomain, InstanceFrontlineSMS_Key from sites where InstanceSMS_ID = '%s'", mysql_real_escape_string($rcat[0]));
+  $qS = sprintf ("select subdomain, InstanceFrontlineSMS_Key from sites where InstanceSMS_ID = lower('%s')", mysql_real_escape_string($rcat[0]));
   $qSit = mysql_query($qS);
   $numResults = mysql_num_rows($qSit);
   if ($numResults > 0) {
