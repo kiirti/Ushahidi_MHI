@@ -88,7 +88,7 @@
 	//?>
 
 	<!--[if IE 6]>
-	<script type="text/javascript" src="js/ie6pngfix.js"></script>
+	<script type="text/javascript" src="media/js/ie6pngfix.js"></script>
 	<script type="text/javascript">DD_belatedPNG.fix('img, ul, ol, li, div, p, a');</script>
 	<![endif]-->
 	<script type="text/javascript">
@@ -112,7 +112,7 @@
 	    </td><td valign= center align= right>
             <span class="copy">
 		<u>TO REPORT AN ISSUE</u><br>
-		call: <b>0512-302-6888</b><br>
+		call: <b>+91-512-302-6888</b><br>
 		text: <b>kiirti {message}</b> to <b>56677</b><br>
 		email: <a href="mailto:contact@kiirti.org">contact@kiirti.org</a>
             </span>
