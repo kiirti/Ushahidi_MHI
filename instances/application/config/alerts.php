@@ -1,4 +1,4 @@
 <?php 
 /* Alerts Email address*/
-$config['alerts_email'] = "";
+$config['alerts_email'] = "test@emoksha.org";
 ?>

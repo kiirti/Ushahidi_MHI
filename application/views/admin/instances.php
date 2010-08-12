@@ -108,6 +108,7 @@
 											<div class="post">
 												<h4><a href="<?php echo $instance_url; ?>" class="more" target="new"><?php echo $instance_sitename; ?></a></h4>
 												<p><?php echo $instance_description; ?></p>
+<p>Instance SMS ID: <?php echo $instance->InstanceSMS_ID; ?></p>
 											</div>
 											<ul class="info">
 												<li class="none-separator">Keywords: <strong><?php echo $instance_keywords; ?></strong></li>

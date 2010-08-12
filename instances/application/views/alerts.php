@@ -40,12 +40,12 @@
 		<h2><?php echo Kohana::lang('ui_main.alerts_step1_select_city'); ?></h2>
 		<div class="map">
 			<p><?php echo Kohana::lang('ui_main.alerts_place_spot'); ?></p>
-			<div class="map-holder" id="divMap"></div>
-		</div>
+			<div class="map-holder" id="divMap"></div></div>
 		<div class="report-find-location">
-			<?php print form::input('location_find', '', ' title="City, State and/or Country" class="findtext"'); ?>
-			<div style="float:left;margin:9px 0 0 5px;"><input type="button" name="button" id="button" value="Find Location" class="btn_find" /></div>
-			<div id="find_loading" class="report-find-loading"></div>
+			<div style="float:left;">
+				<?php print form::input('location_find', '', ' title="City, State and/or Country" class="findtext"'); ?><input style="margin:9px 0 0 5px;"type="button" name="button" id="button" value="Find Location" class="btn_find" style="width:105px;"/>
+				<div id="find_loading" class="report-find-loading"><!-- --></div>
+			</div>
 			<div style="clear:both;" id="find_text">* If you can't find your location, please click on the map to pinpoint the correct location.</div>
 			<div class="alert_slider">
 				<select name="alert_radius" id="alert_radius">

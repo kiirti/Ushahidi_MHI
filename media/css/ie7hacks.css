@@ -1,5 +1,9 @@
 /* Handcoded by RapidxHTML - http://www.rapidxhtml.com */
 
+img {
+    display:block;
+}
+
 div.search-form{
     padding: 0px;
     margin: 10px 15px 10px 5px;

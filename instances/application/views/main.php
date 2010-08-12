@@ -24,31 +24,31 @@
 <div id="subhome-right-content">
      <span class="header">Categories</span><br><br>
      <div id="legend">
-     <span class="list"><br>
-     <ul class="category-filters">
-	     <li><a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:#<?php echo $default_map_all;?>"></div><div class="category-title">All Categories</div></a></li>
+     <span class="list" style="line-height:16px;"><br>
+	     <a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:#<?php echo $default_map_all;?>"></div><div style="margin-left:20px;">ALL CATEGORIES</div></a><br/>
 	     <?php
 		     foreach ($categories as $category => $category_info)
 		     {
 			     $category_title = $category_info[0];
 			     $category_color = $category_info[1];
-			     echo '<li><a href="#" id="cat_'. $category .'"><div class="swatch" style="background-color:#'.$category_color.'"></div><div class="category-title">'.$category_title.'</div></a></li>';
+			     echo '<a href="#" id="cat_'. $category .'"><div class="swatch" style="background-color:#'.$category_color.'"></div><div style="margin-left:20px;">'.$category_title.'</div></a><br/>';
 			     // Get Children
 			     echo '<div class="hide" id="child_'. $category .'">';
 			     foreach ($category_info[2] as $child => $child_info)
 			     {
 				     $child_title = $child_info[0];
 				     $child_color = $child_info[1];
-				     echo '<li style="padding-left:20px;"><a href="#" id="cat_'. $child .'"><div class="swatch" style="background-color:#'.$child_color.'"></div><div class="category-title">'.$child_title.'</div></a></li>';
+				     echo '<a href="#" id="cat_'. $child .'"><div class="swatch" style="background-color:#'.$child_color.'"></div><div style="margin-left:20px;">'.$child_title.'</div></a><br/>';
+					//echo '<a href="http://' . $sharing_domain . Kohana::config('settings.hosting_domain').'" target="_self"><div class="swatch" style="background-color:#'.$sharing_color.'"></div><div style="margin-left:20px;"><font size=3>'.$sharing_site_name.'</font></div></a><br />';
 			     }
 			     echo '</div>';
 		     }
 	     ?>
-     </ul>
      </span>
      </div> 
 </div>
-<!--<div class="sub-simple-content">-->
+<!--for IE-->
+<div></div>
 <div class="slider-holder">
      <?php if($map_container === 'map') { ?>
 	     <form action="">

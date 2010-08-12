@@ -7,6 +7,7 @@
 </div>
 <div class="simple-content">
 
+   <br><span class="copy">Existing users, <a href="<?= url::base() ?>login">Login</a> here.</span><br>
    <?php echo form::open('signup/page1', array('method'=>'post'));?>
    <br><label class="formcopy" for="username">USERNAME :</label><br>
    <input name="username" id="username" type="text" value="" style="width:380px;height:22px;border:solid 1px #b4d3e9;"><br>

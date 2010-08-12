@@ -908,7 +908,8 @@ div.red-box {
 	padding:0 9px 9px 9px;
 	background-color:#eee;
 	border:1px solid #ccc;
-	border-width:0 1px 1px 1px;
+	border-width:1px 1px 1px 1px;
+    	border-collapse: collapse;
 	font-size:90%;
 	color:#666;
 }

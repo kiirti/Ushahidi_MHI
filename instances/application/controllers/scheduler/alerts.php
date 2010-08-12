@@ -22,6 +22,10 @@ class Alerts_Controller extends Controller
 	
 	public function index() 
 	{
+//Added by KB
+$configval = kohana::config('config');
+//
+
 		$settings = kohana::config('settings');
 		$site_name = $settings['site_name'];
 		$alerts_email = $settings['alerts_email'];
@@ -42,12 +46,20 @@ class Alerts_Controller extends Controller
 		  - 1, Incident has been tagged for sending by updating it with 'approved' or 'verified'
 		  - 2, Incident has been tagged as sent. No need to resend again
 		*/
+		
+/*
 		$incidents = $db->query("SELECT incident.id, incident_title, 
 								 incident_description, incident_verified, 
 								 location.latitude, location.longitude, alert_sent.alert_id, alert_sent.incident_id
 								 FROM incident INNER JOIN location ON incident.location_id = location.id
 								 LEFT OUTER JOIN alert_sent ON incident.id = alert_sent.incident_id WHERE
 								 incident.incident_active=1 AND incident.incident_alert_status = 1 ");
+*/
+//Modified by KB on 08/10/2010 to include extra information in body of alert email
+
+		$incidents = $db->query("SELECT incident.id, incident_title, incident_description, incident_verified, location.latitude, location.longitude, alert_sent.alert_id, alert_sent.incident_id, location.location_name,incident_date FROM incident INNER JOIN location ON incident.location_id = location.id LEFT OUTER JOIN alert_sent ON incident.id = alert_sent.incident_id WHERE incident.incident_active=1 AND incident.incident_alert_status = 1;");
+
+//End Modification
 		
 		foreach ($incidents as $incident)
 		{
@@ -120,9 +132,15 @@ class Alerts_Controller extends Controller
 						$to = $alertee->alert_recipient;
 						$from = $alerts_email;
 						$subject = "[$site_name] ".$incident->incident_title;
-						$message = $incident->incident_description
+
+//Modified by KB on 08/10/2010 to include extra details in body of email
+						$message = 		"<a href='".$configval['site_domain']."reports/view/".$incident->id."'>Report URL</a>"
+									."<p> Location : ".$incident->location_name."</p>"
+									."<p> Date : ".$incident->incident_date."</p>"
+									."<p> Description : ".$incident->incident_description."</p>"
 									."<p>".$unsubscribe_message
 									.$alertee->alert_code."</p>";
+//End modification
 
 						if (email::send($to, $from, $subject, $message, TRUE) == 1)
 						{

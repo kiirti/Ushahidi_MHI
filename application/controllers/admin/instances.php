@@ -44,7 +44,7 @@ class Instances_Controller extends Admin_Controller {
     }
 
     $db = Database::instance();    
-    $sites = $db->query("SELECT B.username,B.email,A.id,is_approved,sitename,subdomain,tagline,description,keywords FROM sites AS A JOIN users AS B ON (A.user_id = B.id) WHERE $filter ORDER BY is_approved DESC");
+    $sites = $db->query("SELECT B.username,B.email,A.id,is_approved,sitename,subdomain,tagline,description,keywords,InstanceSMS_ID FROM sites AS A JOIN users AS B ON (A.user_id = B.id) WHERE $filter ORDER BY is_approved DESC");
     $view->set("sites", $sites);
     $view->set("message", $message);
     $this->template->content = $view;
@@ -79,7 +79,7 @@ class Instances_Controller extends Admin_Controller {
     system($cmd);
 
     // tell the user about this. 
-    mail($user->email, "Site Approved", "Your site has been approved");
+    mail($user->email, "Site Approved.", "Your site has been approved \n SMS ID: $site->InstanceSMS_ID");
 
     // And approve the site.
     $site->is_approved = true;

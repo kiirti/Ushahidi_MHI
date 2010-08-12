@@ -15,9 +15,9 @@ site_tagline=$8
 # how to connect
 super_admin="admin"
 super_db="mhidb"
-dbuser="emoksha"
+dbuser="root"
 dbpass="em0ksh2"
-dbhost="kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com"
+dbhost="localhost"
 dbscript="/root/kiirti/multiple/mog/Ushahidi_MHI/instances/sql/ushahidi.sql"
 
 ## This needs to be the name of the instance kiirti runs on
