@@ -62,13 +62,13 @@ $question =~ s/\$\{instances\}/$sections/;
 
 my $result = $mturk->CreateHIT(
     Title       => 'Transcribe an incident report',
-    HITTypeId   => $hit_type,
-    #Description => 'Transcribe the audio file into a report for Kiirti',
-    #Keywords    => 'kiirti',
-    #Reward => {
-    #    CurrencyCode => 'USD',
-    #    Amount       => 0.00
-    #},
+ #   HITTypeId   => $hit_type,
+    Description => 'Transcribe the audio file into a report for Kiirti',
+    Keywords    => 'kiirti',
+    Reward => {
+        CurrencyCode => 'USD',
+        Amount       => 0.00
+    },
     RequesterAnnotation         => 'Test Kiirti Hit',
     AssignmentDurationInSeconds => 60 * 60,
     AutoApprovalDelayInSeconds  => 60 * 60 * 10,

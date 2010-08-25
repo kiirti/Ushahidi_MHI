@@ -2,15 +2,15 @@
 
 // Change DB values before deploying in production
 $mhi_db = array(
-  'user'     => 'root',
+  'user'     => 'emoksha',
   'password' => 'em0ksh2',
-  'host'     => 'localhost',
+  'host'     => 'kiirtidb.c4iuunoxp2j3.us-east-1.rds.amazonaws.com',
   'port'     => '3306',
   'database' => 'mhidb'
 );
 
 // Change the value below before deploying in production
-$mainSite = ".development.kiirti.org/frontlinesms/";
+$mainSite = ".kiirti.org/frontlinesms/";
 
 
 $mult = 1000;

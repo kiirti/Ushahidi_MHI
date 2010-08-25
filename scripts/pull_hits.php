@@ -16,16 +16,14 @@ $cmd = sprintf("%s %s %s %s 2>> %s",
 $output;
 $retval;
 
-#print $cmd."\n";
 $line = exec($cmd, $output, $retval);
-
 foreach ($output as $answer){
 
   $answers = explode("|", $answer);    
   $hit_id = $answers[0];
   $dir = $answers[1];
 
-  if ($hit_id){
+  if ($hit_id && $dir){
   // Default info
   $lat = 0;
   $lon = 0;
